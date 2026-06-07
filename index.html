@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GPT30 — AI Investment</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00e5ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GPT30">
+
+<!-- SEO & Share -->
+<meta name="description" content="GPT30 AI Investment Platform — Earn 16% daily returns on USDT investments">
+<meta property="og:title" content="GPT30 — AI Investment Platform">
+<meta property="og:description" content="Earn 16% daily returns. Plans from $10 USDT. Join thousands of investors!">
+<meta property="og:type" content="website">
+
+<!-- Icons -->
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#02040e;--surface:#060c1c;--card:#090f22;--border:#0f1e44;
+  --glow:#00e5ff;--glow2:#0055ff;--gold:#ffd166;--green:#00f5a0;
+  --red:#ff4d6d;--text:#cde4ff;--muted:#2e4a75;--white:#fff;
+}
+html,body{height:100%;overflow-x:hidden;background:var(--bg)}
+body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+
+/* BG */
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.10;animation:ofl 14s ease-in-out infinite}
+.orb1{width:350px;height:350px;background:var(--glow2);top:-80px;left:-80px}
+.orb2{width:280px;height:280px;background:var(--glow);bottom:-60px;right:-60px;animation-delay:-6s}
+.orb3{width:180px;height:180px;background:#6600ff;top:45%;left:45%;animation-delay:-3s}
+@keyframes ofl{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-25px)}}
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);
+  background-size:30px 30px}
+
+/* APP SHELL */
+.app{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+/* TOP NAV */
+.topnav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px 10px;
+  background:rgba(2,4,14,0.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,229,255,0.06);
+  position:sticky;top:0;z-index:40;
+}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:-1px;
+  background:linear-gradient(135deg,#fff 0%,var(--glow) 60%,var(--glow2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.logo-sub{font-size:0.55rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace}
+.live-pill{display:flex;align-items:center;gap:5px;
+  background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);
+  border-radius:50px;padding:5px 11px;
+  font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--green)}
+.ldot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* MAIN SCROLL AREA */
+.main{flex:1;overflow-y:auto;padding-bottom:80px}
+
+/* PAGES */
+.page{display:none;padding:14px 14px 0;animation:pgIn 0.28s ease}
+.page.active{display:block}
+@keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO CARD */
+.hero{
+  background:linear-gradient(135deg,#0a1835,#060c1c);
+  border:1px solid var(--border);border-radius:20px;
+  padding:20px;margin-bottom:12px;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent)}
+.hero::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,0.07),transparent 70%);right:-30px;top:-30px}
+.hero-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px}
+.hero-bal{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:#fff;line-height:1;
+  text-shadow:0 0 30px rgba(0,229,255,0.2)}
+.hero-bal span{font-size:1rem;color:var(--muted);font-weight:600}
+.hero-row{display:flex;gap:10px;margin-top:14px}
+.hstat{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:10px 12px}
+.hstat-l{font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace}
+.hstat-v{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-top:3px}
+.hstat-v.g{color:var(--green)}.hstat-v.gold{color:var(--gold)}
+
+/* LIVE COUNTER */
+.live-box{
+  background:linear-gradient(135deg,rgba(0,245,160,0.06),rgba(0,229,255,0.03));
+  border:1px solid rgba(0,245,160,0.18);border-radius:18px;
+  padding:14px 16px;margin-bottom:12px;position:relative;overflow:hidden;
+  display:none;
+}
+.live-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.lb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.lb-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:3px;color:var(--green);opacity:0.8}
+.lb-badge{display:flex;align-items:center;gap:5px;background:rgba(0,245,160,0.1);
+  border:1px solid rgba(0,245,160,0.2);border-radius:50px;padding:3px 9px;
+  font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--green)}
+.lb-amount{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--green);
+  text-shadow:0 0 24px rgba(0,245,160,0.4);transition:color 0.1s}
+.lb-amount.flash{color:#fff;text-shadow:0 0 40px rgba(0,245,160,0.9)}
+.lb-sub{display:flex;justify-content:space-between;margin-top:6px}
+.lb-rate{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)}
+.lb-rate strong{color:var(--green)}
+.lb-bar{height:3px;background:rgba(0,245,160,0.08);border-radius:2px;margin-top:8px;overflow:hidden}
+.lb-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--glow));border-radius:2px;transition:width 1s linear}
+
+/* SEC TITLE */
+.sec-ttl{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-bottom:12px}
+
+/* PLAN CARDS */
+.plan-card{
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:18px;margin-bottom:11px;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color 0.3s,transform 0.2s;
+}
+.plan-card:active{transform:scale(0.98)}
+.plan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0}
+.pc0::before{background:linear-gradient(90deg,#555,#999)}
+.pc1::before{background:linear-gradient(90deg,#005522,var(--green))}
+.pc2::before{background:linear-gradient(90deg,#1a3a7a,#60aaff)}
+.pc3::before{background:linear-gradient(90deg,#7a5000,var(--gold))}
+.pc4::before{background:linear-gradient(90deg,#4a0070,#c060ff)}
+.pc5::before{background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.pc-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:1px}
+.pc0 .pc-name{color:#aaa}.pc1 .pc-name{color:var(--green)}.pc2 .pc-name{color:#60aaff}
+.pc3 .pc-name{color:var(--gold)}.pc4 .pc-name{color:#c060ff}.pc5 .pc-name{color:var(--glow)}
+.pc-badge{font-family:'Space Mono',monospace;font-size:0.58rem;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:50px;padding:3px 9px;color:var(--muted)}
+.pc5 .pc-badge{background:rgba(0,229,255,0.08);border-color:rgba(0,229,255,0.2);color:var(--glow)}
+.pc-invest{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#fff;margin-bottom:12px}
+.pc-invest em{font-size:0.85rem;color:var(--muted);font-style:normal;font-weight:400}
+.pc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.pcs{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:9px 8px;text-align:center}
+.pcs-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.pcs-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px;color:#fff}
+.pcs-v.g{color:var(--green)}.pcs-v.gold{color:var(--gold)}
+.invest-btn{width:100%;padding:13px;border-radius:11px;border:none;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:1px;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;transition:all 0.3s}
+.invest-btn:active{transform:scale(0.97)}
+
+/* INVESTMENT CARDS */
+.inv-card{background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:18px;margin-bottom:11px;position:relative;overflow:hidden}
+.inv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.ic-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.ic-name{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--glow);letter-spacing:1px}
+.ic-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.prog-wrap{margin-bottom:14px}
+.prog-top{display:flex;justify-content:space-between;margin-bottom:5px}
+.prog-top span{font-size:0.58rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.prog-track{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--glow2),var(--glow));border-radius:3px;transition:width 1s}
+.tc-row{display:flex;gap:10px;margin-bottom:12px;align-items:stretch}
+.timer-box{flex:1;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.1);
+  border-radius:13px;padding:12px;text-align:center}
+.td{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--glow);
+  letter-spacing:2px;text-shadow:0 0 16px rgba(0,229,255,0.35)}
+.tsub{font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-top:3px;font-family:'Space Mono',monospace}
+.claim-btn{flex:1;border-radius:13px;border:none;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;line-height:1.4;transition:all 0.3s}
+.claim-btn.ready{background:linear-gradient(135deg,#009944,var(--green));color:#000;
+  box-shadow:0 0 20px rgba(0,245,160,0.3);animation:cpulse 2s infinite}
+@keyframes cpulse{0%,100%{box-shadow:0 0 20px rgba(0,245,160,0.3)}50%{box-shadow:0 0 36px rgba(0,245,160,0.6)}}
+.claim-btn.wait{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);cursor:not-allowed}
+.ic-bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
+  padding-top:12px;border-top:1px solid rgba(255,255,255,0.05)}
+.ics{text-align:center}
+.ics-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.ics-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;margin-top:2px;color:var(--green)}
+.empty-state{text-align:center;padding:50px 20px}
+.es-icon{font-size:3rem;opacity:0.35;margin-bottom:12px}
+.es-text{color:var(--muted);font-size:0.85rem}
+.es-btn{margin-top:16px;padding:11px 24px;border-radius:50px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem}
+
+/* WALLET PAGE */
+.wbal-card{background:linear-gradient(135deg,#091630,#060c1c);border:1px solid var(--border);
+  border-radius:20px;padding:20px;margin-bottom:12px;position:relative;overflow:hidden}
+.wbal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent)}
+.wbal-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px}
+.wbal-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:#fff;
+  text-shadow:0 0 24px rgba(0,229,255,0.15)}
+.wbal-amt span{font-size:0.95rem;color:var(--muted);font-weight:400}
+.wbal-btns{display:flex;gap:10px;margin-top:16px}
+.wbal-btn{flex:1;padding:13px;border-radius:13px;border:none;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.5px;transition:all 0.3s}
+.wbal-btn:active{transform:scale(0.97)}
+.dep-btn2{background:linear-gradient(135deg,#006030,var(--green));color:#000}
+.wit-btn2{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000}
+.w-tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:4px;gap:4px;margin-bottom:14px}
+.w-tab{flex:1;padding:10px;text-align:center;border-radius:9px;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;color:var(--muted);border:none;background:transparent;transition:all 0.3s}
+.w-tab.active{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000}
+.wsec{display:none}.wsec.active{display:block}
+.w-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
+.w-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.wc-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:4px}
+.wc-sub{font-size:0.78rem;color:var(--muted);margin-bottom:14px}
+.net-badge{display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,100,0,0.08);border:1px solid rgba(255,100,0,0.2);
+  border-radius:50px;padding:5px 12px;
+  font-family:'Space Mono',monospace;font-size:0.6rem;color:#ff7043;margin-bottom:14px}
+.qr-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
+.qr-box{background:#fff;padding:10px;border-radius:14px;width:130px;height:130px;
+  display:flex;align-items:center;justify-content:center}
+.qr-grid{width:110px;height:110px;display:grid;grid-template-columns:repeat(29,1fr);gap:0}
+.qr-lbl{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--muted);margin-top:7px}
+.addr-lbl{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px}
+.addr-box{display:flex;align-items:center;gap:8px;background:rgba(0,229,255,0.04);
+  border:1px solid rgba(0,229,255,0.12);border-radius:11px;padding:11px 12px;margin-bottom:12px}
+.addr-txt{flex:1;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--glow);word-break:break-all;line-height:1.5}
+.addr-copy{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.18);
+  border-radius:8px;padding:7px 9px;cursor:pointer;font-size:0.9rem;flex-shrink:0}
+.dep-warn{display:flex;gap:9px;align-items:flex-start;
+  background:rgba(255,150,0,0.05);border:1px solid rgba(255,150,0,0.18);
+  border-radius:11px;padding:11px 12px;margin-bottom:12px}
+.dw-txt{font-size:0.75rem;color:#ffb74d;line-height:1.5}
+.dw-txt strong{color:var(--gold)}
+.dep-info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.di{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:9px 8px;text-align:center}
+.di-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.di-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;margin-top:2px}
+.confirm-box{background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:11px;padding:13px}
+.confirm-row{display:flex;gap:8px;margin-bottom:6px}
+.sub-btn{padding:11px 14px;border-radius:10px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;white-space:nowrap}
+.dep-note{font-size:0.68rem;color:var(--muted);line-height:1.4}
+.w-form{display:flex;flex-direction:column;gap:12px}
+.w-fld-l{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
+.w-inp{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:11px;padding:13px 13px;color:#fff;font-family:'DM Sans',sans-serif;
+  font-size:16px;outline:none;transition:border 0.3s}
+.w-inp:focus{border-color:var(--glow)}
+.w-inp::placeholder{color:var(--muted)}
+.amt-row{display:flex;gap:8px}
+.max-btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.04);color:var(--gold);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;cursor:pointer;white-space:nowrap}
+.fee-row{display:flex;justify-content:space-between;background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.05);border-radius:11px;padding:12px 13px}
+.fee-item{text-align:center}
+.fee-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.fee-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;display:block;margin-top:2px}
+.wit-btn{width:100%;padding:14px;border-radius:13px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:1px;
+  box-shadow:0 5px 20px rgba(0,229,255,0.18)}
+.hist-item{background:var(--card);border:1px solid var(--border);border-radius:13px;
+  padding:13px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.hi-type{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#fff}
+.hi-date{font-size:0.68rem;color:var(--muted);margin-top:2px}
+.hi-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;text-align:right}
+.hi-amt.dep{color:var(--green)}.hi-amt.wit{color:var(--gold)}
+.hi-status{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:1px;
+  padding:3px 8px;border-radius:50px;display:inline-block;margin-top:3px}
+.hi-status.pending{background:rgba(255,150,0,0.1);color:#ffb74d;border:1px solid rgba(255,150,0,0.2)}
+.hi-status.done{background:rgba(0,245,160,0.1);color:var(--green);border:1px solid rgba(0,245,160,0.2)}
+.w-empty{text-align:center;padding:16px;color:var(--muted);font-size:0.82rem}
+
+/* REFERRAL PAGE */
+.ref-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.rsc{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:14px 10px;text-align:center}
+.rsc-icon{font-size:1.3rem;margin-bottom:5px}
+.rsc-v{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.rsc-v.g{color:var(--green)}.rsc-v.gold{color:var(--gold)}
+.rsc-l{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
+.how-card{background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
+.how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#7a5000,var(--gold))}
+.how-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--gold);margin-bottom:12px}
+.how-step{display:flex;align-items:flex-start;gap:11px;margin-bottom:10px}
+.how-step:last-child{margin-bottom:0}
+.hs-num{min-width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--glow2),var(--glow));
+  color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hs-txt{font-size:0.82rem;color:var(--text);line-height:1.4;padding-top:2px}
+.ref-link-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}
+.rl-label{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:8px}
+.rl-box{display:flex;align-items:center;gap:8px;background:rgba(0,229,255,0.04);
+  border:1px solid rgba(0,229,255,0.12);border-radius:11px;padding:11px 12px}
+.rl-txt{flex:1;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--glow);word-break:break-all}
+.rl-copy{padding:8px 13px;border-radius:9px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.68rem;white-space:nowrap}
+.ref-code-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}
+.ref-code-disp{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;
+  color:var(--gold);text-align:center;letter-spacing:5px;padding:8px 0;
+  text-shadow:0 0 18px rgba(255,209,102,0.35)}
+
+.ref-item{background:var(--card);border:1px solid var(--border);border-radius:15px;
+  padding:15px;margin-bottom:9px;position:relative;overflow:hidden}
+.ref-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#7a5000,var(--gold))}
+.ri-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ri-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;color:#fff}
+.ri-status{background:rgba(0,245,160,0.1);border:1px solid rgba(0,245,160,0.22);
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--green)}
+.ri-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.ris{background:rgba(255,255,255,0.03);border-radius:9px;padding:8px;text-align:center}
+.ris-l{font-size:0.5rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.ris-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px}
+
+/* PROFILE PAGE */
+.prof-hero{background:linear-gradient(135deg,#091630,#060c1c);border:1px solid var(--border);
+  border-radius:20px;padding:24px 16px 20px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden}
+.prof-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent)}
+.av-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.avatar{width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#000;
+  position:relative;z-index:1}
+.av-ring{position:absolute;inset:-4px;border-radius:50%;
+  border:2px solid var(--glow);opacity:0.5;animation:spin 4s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.prof-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:3px}
+.prof-uid{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);margin-bottom:3px}
+.prof-joined{font-size:0.72rem;color:var(--muted)}
+.prof-sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.psg{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center}
+.psg-icon{font-size:1.3rem;margin-bottom:5px}
+.psg-v{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green)}
+.psg-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
+.prof-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:11px}
+.prof-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:13px}
+.prof-fld{margin-bottom:11px}
+.prof-fld-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
+.prof-save{width:100%;padding:13px;border-radius:12px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:1px;margin-top:4px}
+.menu-item{display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:opacity 0.2s}
+.menu-item:last-child{border-bottom:none;padding-bottom:0}
+.menu-item:active{opacity:0.6}
+.mi-left{display:flex;align-items:center;gap:11px}
+.mi-icon{font-size:1rem;width:28px;text-align:center}
+.mi-title{font-size:0.88rem;color:#fff;font-weight:500}
+.mi-sub{font-size:0.68rem;color:var(--muted);margin-top:1px}
+.mi-arr{font-size:1.1rem;color:var(--muted)}
+.mi-tog{width:42px;height:22px;border-radius:11px;background:var(--border);position:relative;cursor:pointer;transition:background 0.3s}
+.mi-tog.on{background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.mit-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left 0.3s}
+.mi-tog.on .mit-thumb{left:23px}
+.prof-logout{width:100%;padding:13px;border-radius:12px;margin-top:4px;
+  border:1px solid rgba(255,77,109,0.25);background:rgba(255,77,109,0.07);
+  color:var(--red);font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;letter-spacing:1px}
+.prof-reset{width:100%;padding:11px;border-radius:12px;margin-top:8px;
+  border:1px solid rgba(255,77,109,0.12);background:transparent;
+  color:rgba(255,77,109,0.5);font-family:'Syne',sans-serif;font-weight:600;font-size:0.78rem;cursor:pointer;letter-spacing:1px}
+
+/* BOTTOM NAV */
+.bnav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  background:rgba(2,4,14,0.96);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid rgba(0,229,255,0.07);
+  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+  display:flex;gap:2px;z-index:50;
+}
+.nb{flex:1;padding:7px 2px;border-radius:12px;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:600;
+  color:var(--muted);background:transparent;
+  transition:all 0.25s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nb-icon{font-size:1.25rem;line-height:1;transition:transform 0.25s}
+.nb-lbl{font-size:0.56rem;line-height:1}
+.nb-dot{width:4px;height:4px;border-radius:50%;background:var(--glow);opacity:0;transition:opacity 0.25s}
+.nb.active{color:var(--glow)}
+.nb.active .nb-icon{transform:scale(1.18)}
+.nb.active .nb-dot{opacity:1}
+
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);
+  z-index:100;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px)}
+.modal-ov.show{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);
+  border-radius:24px 24px 0 0;padding:0 20px 44px;width:100%;max-width:430px;
+  animation:mUp 0.35s cubic-bezier(0.23,1,0.32,1)}
+@keyframes mUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.m-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:13px auto 20px}
+.m-top{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.m-pname{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--glow)}
+.m-pamt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#fff}
+.m-pamt em{font-size:0.85rem;color:var(--muted);font-style:normal;font-weight:400}
+.m-rows{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.m-row{display:flex;justify-content:space-between;align-items:center;
+  padding:13px 14px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.m-row:last-child{border-bottom:none}
+.mr-l{font-size:0.78rem;color:var(--muted)}
+.mr-v{font-family:'Space Mono',monospace;font-size:0.82rem;color:#fff;font-weight:700}
+.mr-v.g{color:var(--green)}.mr-v.gold{color:var(--gold)}
+.m-confirm{width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;margin-bottom:9px;
+  box-shadow:0 6px 24px rgba(0,229,255,0.2)}
+.m-cancel{width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.9rem;cursor:pointer}
+
+/* TOAST */
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);
+  opacity:0;background:var(--card);border:1px solid rgba(0,245,160,0.3);
+  color:var(--green);padding:11px 22px;border-radius:50px;
+  font-family:'Space Mono',monospace;font-size:0.66rem;letter-spacing:1px;
+  z-index:200;transition:all 0.35s;white-space:nowrap;
+  box-shadow:0 0 24px rgba(0,245,160,0.15)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* PENDING INVESTMENT CARD */
+.pending-card{
+  background:var(--card);border:1px solid rgba(255,160,0,0.25);border-radius:18px;
+  padding:18px;margin-bottom:11px;position:relative;overflow:hidden;
+}
+.pending-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#7a5000,var(--gold))}
+.pc-pending-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.pc-pending-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--gold)}
+.pc-pending-date{font-size:0.68rem;color:var(--muted);margin-top:3px}
+.pc-pending-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.pc-pending-status{display:flex;align-items:center;gap:8px;
+  background:rgba(255,160,0,0.08);border:1px solid rgba(255,160,0,0.15);
+  border-radius:10px;padding:10px 12px;margin-bottom:10px;
+  font-size:0.78rem;color:#ffb74d;font-weight:500}
+.pcs-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);
+  flex-shrink:0;animation:blink 1.5s infinite}
+.pc-pending-info{font-size:0.75rem;color:var(--muted);line-height:1.5;
+  padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:10px}
+.pc-pending-info strong{color:var(--glow)}
+
+
+/* LEGAL MODAL */
+.legal-modal{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  width:100%;max-width:430px;height:100vh;
+  display:flex;flex-direction:column;
+  animation:mUp 0.3s ease;
+}
+.lm-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 18px;border-bottom:1px solid var(--border);
+  background:rgba(2,4,14,0.95);position:sticky;top:0;
+}
+.lm-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--glow)}
+.lm-close{background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  border-radius:50%;width:32px;height:32px;color:var(--muted);
+  font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lm-body{flex:1;overflow-y:auto;padding:20px 18px 40px;-webkit-overflow-scrolling:touch}
+.lm-section{margin-bottom:22px}
+.lm-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;
+  color:var(--gold);margin-bottom:8px;padding-bottom:6px;
+  border-bottom:1px solid rgba(255,209,102,0.15)}
+.lm-text{font-size:0.82rem;color:var(--text);line-height:1.75;opacity:0.85}
+.lm-text strong{color:#fff;font-weight:600}
+.lm-badge{display:inline-block;background:rgba(0,229,255,0.08);
+  border:1px solid rgba(0,229,255,0.2);border-radius:8px;
+  padding:10px 14px;margin:8px 0;font-size:0.78rem;color:var(--glow);line-height:1.6;width:100%}
+.lm-last{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:20px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.05)}
+
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;background:var(--bg);z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 0.6s ease;}
+#splash.hide{opacity:0;pointer-events:none}
+.splash-bg{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,rgba(0,85,255,0.15),transparent 70%)}
+.splash-content{position:relative;z-index:1;text-align:center;padding:40px 30px;width:100%}
+.splash-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;letter-spacing:-2px;
+  background:linear-gradient(135deg,#fff 0%,var(--glow) 50%,var(--glow2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;animation:splashPulse 2s ease-in-out infinite}
+@keyframes splashPulse{0%,100%{opacity:1}50%{opacity:0.7}}
+.splash-sub{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:6px;
+  color:var(--muted);margin-bottom:60px}
+.splash-orb{width:120px;height:120px;border-radius:50%;margin:0 auto 50px;
+  background:radial-gradient(circle,rgba(0,229,255,0.15),transparent 70%);
+  border:1px solid rgba(0,229,255,0.2);position:relative;
+  animation:orbSpin 3s linear infinite}
+.splash-orb::before{content:'';position:absolute;inset:-10px;border-radius:50%;
+  border:1px dashed rgba(0,229,255,0.15);animation:orbSpin 8s linear infinite reverse}
+.splash-orb::after{content:'⚡';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);font-size:2.5rem}
+@keyframes orbSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.splash-loader{margin-bottom:20px}
+.sl-track{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;
+  overflow:hidden;margin-bottom:10px;width:200px;margin:0 auto 10px}
+.sl-fill{height:100%;background:linear-gradient(90deg,var(--glow2),var(--glow));
+  border-radius:2px;width:0%;transition:width 0.3s}
+.sl-text{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--muted)}
+.splash-version{font-family:'Space Mono',monospace;font-size:0.55rem;color:rgba(46,74,117,0.6);
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);white-space:nowrap}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar{
+  display:flex;align-items:center;
+  background:linear-gradient(90deg,rgba(0,85,255,0.15),rgba(0,229,255,0.1),rgba(0,85,255,0.15));
+  border-bottom:1px solid rgba(0,229,255,0.12);
+  padding:0;overflow:hidden;position:relative;height:32px;
+}
+.ab-track{flex:1;overflow:hidden;white-space:nowrap}
+.ab-content{
+  display:inline-block;
+  font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--glow);
+  padding:0 20px;line-height:32px;
+  animation:marquee 30s linear infinite;
+  white-space:nowrap;
+}
+@keyframes marquee{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+.ab-close{background:none;border:none;color:var(--muted);
+  font-size:0.7rem;padding:0 10px;cursor:pointer;height:32px;flex-shrink:0}
+
+/* ── LEADERBOARD ── */
+.lb-hero{
+  background:linear-gradient(135deg,#0a1835,#060c1c);
+  border:1px solid var(--border);border-radius:20px;
+  padding:20px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden;
+}
+.lb-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.lbh-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;
+  color:var(--gold);margin-bottom:4px}
+.lbh-sub{font-size:0.72rem;color:var(--muted)}
+
+.my-rank-card{
+  background:linear-gradient(135deg,rgba(0,85,255,0.1),rgba(0,229,255,0.05));
+  border:1px solid rgba(0,229,255,0.2);border-radius:16px;
+  padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px;
+}
+.mrc-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--glow)}
+.mrc-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.mrc-mid{flex:1}
+.mrc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff}
+.mrc-joined{font-size:0.7rem;color:var(--muted);margin-top:2px}
+.mrc-earned{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green);text-align:right}
+
+.lb-tabs{display:flex;gap:8px;margin-bottom:14px}
+.lb-tab{flex:1;padding:11px;border-radius:12px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);font-family:'Syne',sans-serif;
+  font-weight:700;font-size:0.78rem;cursor:pointer;transition:all 0.3s}
+.lb-tab.active{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;border-color:transparent}
+
+.lb-item{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;
+}
+.lb-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;
+  min-width:32px;text-align:center}
+.lb-rank.r1{color:var(--gold)}.lb-rank.r2{color:#c0c0c0}.lb-rank.r3{color:#cd7f32}
+.lb-rank.rn{color:var(--muted)}
+.lb-av{width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#000;flex-shrink:0}
+.lb-info{flex:1}
+.lb-uname{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:#fff}
+.lb-detail{font-size:0.65rem;color:var(--muted);margin-top:2px}
+.lb-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--green);text-align:right}
+
+/* Telegram badge */
+.tg-badge{background:linear-gradient(135deg,#0088cc,#00aaff);color:#fff;
+  font-family:'Space Mono',monospace;font-size:0.55rem;padding:4px 10px;
+  border-radius:50px;letter-spacing:1px;white-space:nowrap}
+
+
+/* ── 2-LEVEL REFERRAL ── */
+.comm-cards{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.comm-card{flex:1;border-radius:16px;padding:16px 12px;text-align:center;position:relative;overflow:hidden}
+.comm-card.level1{background:linear-gradient(135deg,rgba(255,160,0,0.08),rgba(255,209,102,0.05));border:1px solid rgba(255,209,102,0.25)}
+.comm-card.level2{background:linear-gradient(135deg,rgba(192,96,255,0.08),rgba(100,0,200,0.05));border:1px solid rgba(192,96,255,0.25)}
+.cc-icon{font-size:1.4rem;margin-bottom:6px}
+.cc-level{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:4px}
+.cc-pct{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1}
+.comm-card.level1 .cc-pct{color:var(--gold)}
+.comm-card.level2 .cc-pct{color:#c060ff}
+.cc-desc{font-size:0.65rem;color:var(--muted);margin-top:5px;line-height:1.4}
+.comm-arrow{font-size:1.4rem;color:var(--muted);flex-shrink:0}
+
+.comm-example{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px;margin-bottom:12px}
+.ce-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:12px}
+.ce-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0}
+.ce-label{font-size:0.78rem;color:var(--muted)}
+.ce-val{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem}
+.ce-divider{height:1px;background:rgba(255,255,255,0.06);margin:6px 0}
+
+/* level badges on ref items */
+.ri-lvl1{background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.25);
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--gold)}
+.ri-lvl2{background:rgba(192,96,255,0.1);border:1px solid rgba(192,96,255,0.25);
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:#c060ff}
+
+
+/* ── SHARE BUTTONS ── */
+.share-title{
+  font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;
+  color:var(--muted);margin:14px 0 10px;
+}
+.share-btns{display:flex;gap:8px;justify-content:space-between}
+.share-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:10px 4px;border-radius:14px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);cursor:pointer;transition:all 0.25s;
+}
+.share-btn:active{transform:scale(0.93)}
+.sb-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.sb-label{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.58rem;color:var(--muted);white-space:nowrap}
+
+.share-btn.whatsapp{border-color:rgba(37,211,102,0.25);background:rgba(37,211,102,0.06)}
+.share-btn.whatsapp .sb-icon{background:rgba(37,211,102,0.12);color:#25d366}
+.share-btn.whatsapp .sb-label{color:#25d366}
+
+.share-btn.facebook{border-color:rgba(24,119,242,0.25);background:rgba(24,119,242,0.06)}
+.share-btn.facebook .sb-icon{background:rgba(24,119,242,0.12);color:#1877f2}
+.share-btn.facebook .sb-label{color:#1877f2}
+
+.share-btn.telegram{border-color:rgba(0,136,204,0.25);background:rgba(0,136,204,0.06)}
+.share-btn.telegram .sb-icon{background:rgba(0,136,204,0.12);color:#0088cc}
+.share-btn.telegram .sb-label{color:#0088cc}
+
+.share-btn.twitter{border-color:rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)}
+.share-btn.twitter .sb-icon{background:rgba(255,255,255,0.08);color:#fff}
+.share-btn.twitter .sb-label{color:var(--muted)}
+
+.share-btn.native{border-color:rgba(0,229,255,0.2);background:rgba(0,229,255,0.05)}
+.share-btn.native .sb-icon{background:rgba(0,229,255,0.1);color:var(--glow)}
+.share-btn.native .sb-label{color:var(--glow)}
+
+
+/* ── INSTALL PROMPT ── */
+.install-bar{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 28px);max-width:402px;
+  background:linear-gradient(135deg,#0a1835,#060e22);
+  border:1px solid rgba(0,229,255,0.25);border-radius:16px;
+  padding:12px 14px;display:flex;justify-content:space-between;align-items:center;
+  z-index:49;box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  animation:slideUpBar 0.4s ease;
+}
+@keyframes slideUpBar{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+.ib-left{display:flex;align-items:center;gap:10px;flex:1}
+.ib-icon{font-size:1.6rem;flex-shrink:0}
+.ib-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff}
+.ib-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
+.ib-btns{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.ib-dismiss{background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;padding:4px}
+.ib-install{padding:8px 14px;border-radius:10px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.5px}
+
+</style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-bg"></div>
+  <div class="splash-content">
+    <div class="splash-logo">GPT30</div>
+    <div class="splash-sub">AI INVESTMENT PLATFORM</div>
+    <div class="splash-orb"></div>
+    <div class="splash-loader">
+      <div class="sl-track"><div class="sl-fill" id="slFill"></div></div>
+      <div class="sl-text" id="slText">Initializing...</div>
+    </div>
+    <div class="splash-version">v3.0 · Powered by AI</div>
+  </div>
+</div>
+
+<div class="bg-orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+<div class="bg-grid"></div>
+
+<div class="app">
+  <!-- TOP NAV -->
+  <div class="topnav">
+    <div>
+      <div class="logo">GPT30</div>
+      <div class="logo-sub">AI INVESTMENT PLATFORM</div>
+    </div>
+    <div class="live-pill"><div class="ldot"></div>LIVE</div>
+  </div>
+
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar" id="announceBar">
+    <div class="ab-track">
+      <div class="ab-content" id="abContent">
+        🎉 Welcome to GPT30! &nbsp;•&nbsp; 💰 Earn 16% daily returns &nbsp;•&nbsp; 👥 Refer friends & earn 15% commission &nbsp;•&nbsp; 🔒 Secure TRC20 withdrawals &nbsp;•&nbsp; ⚡ Plans starting from just $10 USDT &nbsp;•&nbsp; 🚀 Join thousands of investors today!
+      </div>
+    </div>
+    <button class="ab-close" onclick="closeAnnounce()">✕</button>
+  </div>
+
+  <!-- MAIN SCROLL -->
+  <div class="main">
+
+    <!-- ═══ PAGE: PLANS ═══ -->
+    <div class="page active" id="page-plans">
+      <div class="hero">
+        <div class="hero-label">TOTAL WALLET BALANCE</div>
+        <div class="hero-bal" id="heroBal">0.00 <span>USDT</span></div>
+        <div class="hero-row">
+          <div class="hstat"><div class="hstat-l">TOTAL EARNED</div><div class="hstat-v g" id="heroEarned">$0.00</div></div>
+          <div class="hstat"><div class="hstat-l">ACTIVE PLANS</div><div class="hstat-v gold" id="heroPlans">0</div></div>
+        </div>
+      </div>
+      <!-- Live Counter -->
+      <div class="live-box" id="liveBox">
+        <div class="lb-top">
+          <div class="lb-label">⚡ LIVE EARNING</div>
+          <div class="lb-badge"><div class="ldot"></div>REAL-TIME</div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <div class="lb-amount" id="liveAmt">0.000000</div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:5px">USDT</div>
+        </div>
+        <div class="lb-sub">
+          <div class="lb-rate">Per sec: <strong id="liveRate">0.000000</strong> USDT</div>
+          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)" id="liveDayEarn">$0.00 today</div>
+        </div>
+        <div class="lb-bar"><div class="lb-fill" id="lbFill"></div></div>
+      </div>
+      <div class="sec-ttl" style="margin-top:14px">CHOOSE YOUR PLAN</div>
+      <div id="plansList"></div>
+    </div>
+
+    <!-- ═══ PAGE: INVESTMENTS ═══ -->
+    <div class="page" id="page-investments">
+      <div class="sec-ttl">MY ACTIVE INVESTMENTS</div>
+      <div id="invList"></div>
+    </div>
+
+    <!-- ═══ PAGE: WALLET ═══ -->
+    <div class="page" id="page-wallet">
+      <div class="wbal-card">
+        <div class="wbal-label">AVAILABLE BALANCE</div>
+        <div class="wbal-amt" id="wBal">0.00 <span>USDT</span></div>
+        <div class="wbal-btns">
+          <button class="wbal-btn dep-btn2" onclick="wTab('dep')">⬇️ DEPOSIT</button>
+          <button class="wbal-btn wit-btn2" onclick="wTab('wit')">⬆️ WITHDRAW</button>
+        </div>
+      </div>
+      <div class="w-tabs">
+        <button class="w-tab active" id="wtab-dep" onclick="wTab('dep')">💰 Deposit</button>
+        <button class="w-tab" id="wtab-wit" onclick="wTab('wit')">💸 Withdraw</button>
+        <button class="w-tab" id="wtab-hist" onclick="wTab('hist')">📋 History</button>
+      </div>
+      <!-- DEPOSIT -->
+      <div class="wsec active" id="wsec-dep">
+        <div class="w-card">
+          <div class="wc-title">💰 Deposit USDT</div>
+          <div class="wc-sub">Send USDT (TRC20) to the address below</div>
+          <div class="net-badge">🔗 TRON Network · TRC20</div>
+          <div class="qr-wrap">
+            <div class="qr-box"><div class="qr-grid" id="qrGrid"></div></div>
+            <div class="qr-lbl">SCAN TO DEPOSIT</div>
+          </div>
+          <div class="addr-lbl">DEPOSIT ADDRESS (TRC20)</div>
+          <div class="addr-box">
+            <div class="addr-txt" id="depAddrTxt">TKgBiq9giSe2PZcKeE72QQcnUiDwa7AN8q</div>
+            <button class="addr-copy" onclick="copyAddr()" id="addrCopyBtn">📋</button>
+          </div>
+          <div class="dep-warn"><div style="font-size:1rem;flex-shrink:0">⚠️</div><div class="dw-txt">Only send <strong>USDT TRC20</strong> to this address. Any other coin will be permanently lost.</div></div>
+          <div class="dep-info">
+            <div class="di"><div class="di-l">MIN DEPOSIT</div><div class="di-v">10 USDT</div></div>
+            <div class="di"><div class="di-l">NETWORK</div><div class="di-v" style="color:var(--gold)">TRC20</div></div>
+            <div class="di"><div class="di-l">ARRIVAL</div><div class="di-v" style="color:var(--green)">~5 min</div></div>
+          </div>
+          <div class="confirm-box">
+            <div class="addr-lbl" style="margin-bottom:8px">CONFIRM DEPOSIT AMOUNT</div>
+            <div class="confirm-row">
+              <input class="w-inp" id="depAmt" type="number" placeholder="Enter USDT amount..." />
+              <button class="sub-btn" onclick="submitDep()">SUBMIT</button>
+            </div>
+            <div class="dep-note">After sending, enter amount and submit for manual review.</div>
+          </div>
+        </div>
+      </div>
+      <!-- WITHDRAW -->
+      <div class="wsec" id="wsec-wit">
+        <div class="w-card">
+          <div class="wc-title">💸 Withdraw USDT</div>
+          <div class="wc-sub">Withdraw directly to your TRC20 wallet</div>
+          <div class="net-badge">🔗 TRON Network · TRC20</div>
+          <div class="w-form">
+            <div><div class="w-fld-l">YOUR TRC20 ADDRESS</div><input class="w-inp" id="witAddr" placeholder="Enter your TRC20 address..." /></div>
+            <div><div class="w-fld-l">AMOUNT (USDT)</div>
+              <div class="amt-row">
+                <input class="w-inp" id="witAmt" type="number" placeholder="Min: 10 USDT" oninput="updateReceive()" />
+                <button class="max-btn" onclick="setMax()">MAX</button>
+              </div>
+            </div>
+            <div class="fee-row">
+              <div class="fee-item"><div class="fee-l">MIN WITHDRAW</div><span class="fee-v">10 USDT</span></div>
+              <div class="fee-item"><div class="fee-l">NETWORK FEE</div><span class="fee-v" style="color:var(--gold)">1 USDT</span></div>
+              <div class="fee-item"><div class="fee-l">YOU RECEIVE</div><span class="fee-v" style="color:var(--green)" id="receiveAmt">— USDT</span></div>
+            </div>
+            <button class="wit-btn" onclick="submitWit()">⬆️ WITHDRAW NOW</button>
+          </div>
+          <div class="dep-warn" style="margin-top:12px"><div style="font-size:1rem;flex-shrink:0">ℹ️</div><div class="dw-txt">Withdrawals processed within <strong>24 hours</strong>. Double-check your TRC20 address.</div></div>
+        </div>
+      </div>
+      <!-- HISTORY -->
+      <div class="wsec" id="wsec-hist">
+        <div class="sec-ttl">DEPOSIT HISTORY</div>
+        <div id="depHist"><div class="w-empty">No deposits yet</div></div>
+        <div class="sec-ttl" style="margin-top:14px">WITHDRAWAL HISTORY</div>
+        <div id="witHist"><div class="w-empty">No withdrawals yet</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE: REFERRAL ═══ -->
+    <div class="page" id="page-referral">
+      <div class="ref-stats">
+        <div class="rsc"><div class="rsc-icon">👥</div><div class="rsc-v" id="refCnt">0</div><div class="rsc-l">LVL 1 REFS</div></div>
+        <div class="rsc"><div class="rsc-icon">👥👥</div><div class="rsc-v" id="refCnt2">0</div><div class="rsc-l">LVL 2 REFS</div></div>
+        <div class="rsc"><div class="rsc-icon">💰</div><div class="rsc-v g" id="refEarned">$0.00</div><div class="rsc-l">TOTAL EARNED</div></div>
+      </div>
+      <!-- Commission Level Cards -->
+      <div class="comm-cards">
+        <div class="comm-card level1">
+          <div class="cc-icon">👥</div>
+          <div class="cc-level">LEVEL 1</div>
+          <div class="cc-pct">15%</div>
+          <div class="cc-desc">Direct Referral<br>Daily Commission</div>
+        </div>
+        <div class="comm-arrow">→</div>
+        <div class="comm-card level2">
+          <div class="cc-icon">👥👥</div>
+          <div class="cc-level">LEVEL 2</div>
+          <div class="cc-pct">5%</div>
+          <div class="cc-desc">Team Referral<br>Daily Commission</div>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-title">💡 How It Works</div>
+        <div class="how-step"><div class="hs-num">1</div><div class="hs-txt">Share your referral link — friend joins & invests → you earn <strong style="color:var(--gold)">15%</strong> of their daily earnings</div></div>
+        <div class="how-step"><div class="hs-num">2</div><div class="hs-txt">Your friend shares their link — someone joins under them → you earn <strong style="color:#c060ff">5%</strong> of that person's daily earnings</div></div>
+        <div class="how-step"><div class="hs-num">3</div><div class="hs-txt">Both commissions credited <strong style="color:var(--green)">daily</strong> — as long as they keep earning!</div></div>
+      </div>
+
+      <!-- Example Box -->
+      <div class="comm-example">
+        <div class="ce-title">📊 Example</div>
+        <div class="ce-row"><span class="ce-label">Friend earns $16/day</span><span class="ce-val" style="color:var(--gold)">You get $2.40/day (15%)</span></div>
+        <div class="ce-row"><span class="ce-label">Their referral earns $16/day</span><span class="ce-val" style="color:#c060ff">You get $0.80/day (5%)</span></div>
+        <div class="ce-divider"></div>
+        <div class="ce-row"><span class="ce-label" style="color:#fff;font-weight:700">Total daily passive</span><span class="ce-val" style="color:var(--green);font-size:1rem">$3.20/day</span></div>
+      </div>
+      <div class="ref-link-card">
+        <div class="rl-label">YOUR REFERRAL LINK</div>
+        <div class="rl-box">
+          <div class="rl-txt" id="refLinkTxt">gpt30.app/ref/loading...</div>
+          <button class="rl-copy" onclick="copyRef()" id="refCopyBtn">COPY</button>
+        </div>
+        <!-- SHARE BUTTONS -->
+        <div class="share-title">SHARE VIA</div>
+        <div class="share-btns">
+          <button class="share-btn whatsapp" onclick="shareWA()">
+            <div class="sb-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="sb-label">WhatsApp</div>
+          </button>
+          <button class="share-btn facebook" onclick="shareFB()">
+            <div class="sb-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div class="sb-label">Facebook</div>
+          </button>
+          <button class="share-btn telegram" onclick="shareTG()">
+            <div class="sb-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </div>
+            <div class="sb-label">Telegram</div>
+          </button>
+          <button class="share-btn twitter" onclick="shareTwitter()">
+            <div class="sb-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <div class="sb-label">Twitter</div>
+          </button>
+          <button class="share-btn native" onclick="shareNative()">
+            <div class="sb-icon">📤</div>
+            <div class="sb-label">More</div>
+          </button>
+        </div>
+      </div>
+      <div class="ref-code-card">
+        <div class="rl-label">YOUR REFERRAL CODE</div>
+        <div class="ref-code-disp" id="refCodeDisp">—</div>
+      </div>
+      <div class="sec-ttl" style="margin-top:4px">LEVEL 1 — DIRECT REFERRALS <span style="color:var(--gold)">(15%)</span></div>
+      <div id="refList"><div class="empty-state"><div class="es-icon">👥</div><div class="es-text">No direct referrals yet.</div></div></div>
+      <div class="sec-ttl" style="margin-top:14px">LEVEL 2 — TEAM REFERRALS <span style="color:#c060ff">(5%)</span></div>
+      <div id="refList2"><div class="empty-state"><div class="es-icon">👥👥</div><div class="es-text">No team referrals yet.</div></div></div>
+    </div>
+
+    <!-- ═══ PAGE: PROFILE ═══ -->
+    <div class="page" id="page-profile">
+      <div class="prof-hero">
+        <div class="av-wrap">
+          <div class="avatar" id="profAv">G</div>
+          <div class="av-ring"></div>
+        </div>
+        <div class="prof-name" id="profNameDisp">GPT30 User</div>
+        <div class="prof-uid">UID: <span id="profUID">—</span></div>
+        <div class="prof-joined">Member since <span id="profJoined">—</span></div>
+      </div>
+      <div class="prof-sgrid">
+        <div class="psg"><div class="psg-icon">💰</div><div class="psg-v" id="psTotalE">$0.00</div><div class="psg-l">TOTAL EARNED</div></div>
+        <div class="psg"><div class="psg-icon">📈</div><div class="psg-v" id="psPlans">0</div><div class="psg-l">ACTIVE PLANS</div></div>
+        <div class="psg"><div class="psg-icon">👥</div><div class="psg-v" id="psRefs">0</div><div class="psg-l">REFERRALS</div></div>
+        <div class="psg"><div class="psg-icon">🏆</div><div class="psg-v" id="psLevel" style="font-size:0.82rem">Starter</div><div class="psg-l">LEVEL</div></div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">✏️ Edit Profile</div>
+        <div class="prof-fld"><div class="prof-fld-l">FULL NAME</div><input class="w-inp" id="editName" placeholder="Enter your name..." /></div>
+        <div class="prof-fld"><div class="prof-fld-l">EMAIL</div><input class="w-inp" id="editEmail" placeholder="Enter email..." type="email" /></div>
+        <div class="prof-fld"><div class="prof-fld-l">PHONE</div><input class="w-inp" id="editPhone" placeholder="Enter phone..." type="tel" /></div>
+        <button class="prof-save" onclick="saveProf()">💾 SAVE PROFILE</button>
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">🔐 Security</div>
+        <div class="menu-item" onclick="toast('🔑 Coming soon!')"><div class="mi-left"><div class="mi-icon">🔑</div><div><div class="mi-title">Change Password</div><div class="mi-sub">Update login password</div></div></div><div class="mi-arr">›</div></div>
+        <div class="menu-item" onclick="toast('📱 Coming soon!')"><div class="mi-left"><div class="mi-icon">📱</div><div><div class="mi-title">2FA Auth</div><div class="mi-sub">Extra security layer</div></div></div><div class="mi-arr">›</div></div>
+
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">⚙️ Settings</div>
+        <div class="menu-item" onclick="toggleNotif()"><div class="mi-left"><div class="mi-icon">🔔</div><div><div class="mi-title">Notifications</div><div class="mi-sub">Daily earning alerts</div></div></div><div class="mi-tog" id="notifTog"><div class="mit-thumb"></div></div></div>
+        <div class="menu-item" onclick="toast('🌐 Language coming soon!')"><div class="mi-left"><div class="mi-icon">🌐</div><div><div class="mi-title">Language</div><div class="mi-sub">English</div></div></div><div class="mi-arr">›</div></div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">🏆 Leaderboard</div>
+        <div class="menu-item" onclick="goPage('leaderboard')"><div class="mi-left"><div class="mi-icon">🏆</div><div><div class="mi-title">Top Investors</div><div class="mi-sub">See global rankings</div></div></div><div class="mi-arr">›</div></div>
+        <div class="menu-item" onclick="goPage('leaderboard')"><div class="mi-left"><div class="mi-icon">👥</div><div><div class="mi-title">Top Referrers</div><div class="mi-sub">Best referral earners</div></div></div><div class="mi-arr">›</div></div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">💬 Support</div>
+        <div class="menu-item" onclick="toast('📧 support@gpt30.app')"><div class="mi-left"><div class="mi-icon">📧</div><div><div class="mi-title">Email Support</div><div class="mi-sub">support@gpt30.app</div></div></div><div class="mi-arr">›</div></div>
+        <div class="menu-item" onclick="openTelegram()"><div class="mi-left"><div class="mi-icon">✈️</div><div><div class="mi-title">Telegram Support</div><div class="mi-sub">@GPT30Support</div></div></div><div class="tg-badge">OPEN</div></div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-card-title">📄 Legal</div>
+        <div class="menu-item" onclick="openLegal('terms')"><div class="mi-left"><div class="mi-icon">📋</div><div><div class="mi-title">Terms & Conditions</div><div class="mi-sub">Read our terms of service</div></div></div><div class="mi-arr">›</div></div>
+        <div class="menu-item" onclick="openLegal('privacy')"><div class="mi-left"><div class="mi-icon">🔒</div><div><div class="mi-title">Privacy Policy</div><div class="mi-sub">How we protect your data</div></div></div><div class="mi-arr">›</div></div>
+      </div>
+      <button class="prof-logout" onclick="doLogout()">🚪 LOGOUT</button>
+      <button class="prof-reset" onclick="doReset()">🗑️ CLEAR ALL DATA</button>
+      <div style="height:16px"></div>
+    </div>
+
+
+    <!-- ═══ PAGE: LEADERBOARD ═══ -->
+    <div class="page" id="page-leaderboard">
+      <div class="lb-hero">
+        <div class="lbh-title">🏆 Top Investors</div>
+        <div class="lbh-sub">Global leaderboard — updated daily</div>
+      </div>
+      <!-- My Rank -->
+      <div class="my-rank-card">
+        <div class="mrc-left">
+          <div class="mrc-rank">#—</div>
+          <div class="mrc-label">YOUR RANK</div>
+        </div>
+        <div class="mrc-mid">
+          <div class="mrc-name" id="lbMyName">You</div>
+          <div class="mrc-joined">Keep investing to rank up!</div>
+        </div>
+        <div class="mrc-right">
+          <div class="mrc-earned" id="lbMyEarned">$0.00</div>
+          <div class="mrc-label">EARNED</div>
+        </div>
+      </div>
+      <!-- Filter tabs -->
+      <div class="lb-tabs">
+        <button class="lb-tab active" onclick="lbFilter('earned')">💰 Top Earners</button>
+        <button class="lb-tab" onclick="lbFilter('referral')">👥 Top Referrers</button>
+      </div>
+      <div id="lbList"></div>
+    </div>
+
+  </div><!-- end main -->
+</div><!-- end app -->
+
+<!-- INSTALL PROMPT -->
+<div class="install-bar" id="installBar" style="display:none">
+  <div class="ib-left">
+    <div class="ib-icon">⚡</div>
+    <div>
+      <div class="ib-title">Install GPT30 App</div>
+      <div class="ib-sub">Add to home screen for best experience</div>
+    </div>
+  </div>
+  <div class="ib-btns">
+    <button class="ib-dismiss" onclick="dismissInstall()">✕</button>
+    <button class="ib-install" onclick="installApp()">INSTALL</button>
+  </div>
+</div>
+
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="nb active" id="nb-plans" onclick="goPage('plans')"><div class="nb-icon">📈</div><div class="nb-lbl">Plans</div><div class="nb-dot"></div></button>
+  <button class="nb" id="nb-investments" onclick="goPage('investments')"><div class="nb-icon">💼</div><div class="nb-lbl">Invested</div><div class="nb-dot"></div></button>
+  <button class="nb" id="nb-wallet" onclick="goPage('wallet')"><div class="nb-icon">💳</div><div class="nb-lbl">Wallet</div><div class="nb-dot"></div></button>
+  <button class="nb" id="nb-referral" onclick="goPage('referral')"><div class="nb-icon">👥</div><div class="nb-lbl">Refer</div><div class="nb-dot"></div></button>
+  <button class="nb" id="nb-profile" onclick="goPage('profile')"><div class="nb-icon">👤</div><div class="nb-lbl">Profile</div><div class="nb-dot"></div></button>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="modal-ov" id="legalModal" style="align-items:flex-start;padding-top:0">
+  <div class="legal-modal">
+    <div class="lm-header">
+      <div class="lm-title" id="lmTitle">Terms & Conditions</div>
+      <button class="lm-close" onclick="closeLegal()">✕</button>
+    </div>
+    <div class="lm-body" id="lmBody"></div>
+  </div>
+</div>
+
+
+<!-- PENDING MODAL -->
+<div class="modal-ov" id="pendingModal">
+  <div class="modal">
+    <div class="m-handle"></div>
+    <div style="text-align:center;padding:10px 0 20px">
+      <div style="font-size:3rem;margin-bottom:12px">⏳</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:6px" id="pmPlan">— PLAN</div>
+      <div style="font-family:'Space Mono',monospace;font-size:1rem;color:var(--gold);margin-bottom:16px" id="pmAmt">—</div>
+      <div style="background:rgba(255,160,0,0.07);border:1px solid rgba(255,160,0,0.2);border-radius:14px;padding:16px;margin-bottom:16px;text-align:left">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--gold);margin-bottom:10px;font-size:0.9rem">📋 Next Steps:</div>
+        <div style="font-size:0.82rem;color:var(--text);line-height:1.8">
+          1️⃣ Go to <strong style="color:var(--glow)">Wallet → Deposit</strong><br>
+          2️⃣ Send exact USDT amount to TRC20 address<br>
+          3️⃣ Submit your deposit for review<br>
+          4️⃣ Admin will approve within <strong style="color:var(--green)">24 hours</strong><br>
+          5️⃣ Your plan activates automatically ✅
+        </div>
+      </div>
+      <button class="m-confirm" onclick="closePendingModal()" style="margin-bottom:0">💳 GO TO DEPOSIT</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- INVEST MODAL -->
+<div class="modal-ov" id="modal">
+  <div class="modal">
+    <div class="m-handle"></div>
+    <div class="m-top">
+      <div><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:3px">PLAN</div><div class="m-pname" id="mName">—</div></div>
+      <div style="text-align:right"><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:3px">INVEST</div><div class="m-pamt" id="mAmt">—</div></div>
+    </div>
+    <div class="m-rows" id="mRows"></div>
+    <button class="m-confirm" onclick="confirmInvest()">⚡ CONFIRM INVESTMENT</button>
+    <button class="m-cancel" onclick="closeModal()">Cancel</button>
+    <div style="text-align:center;margin-top:12px;font-size:0.68rem;color:var(--muted)">
+      By investing you agree to our 
+      <span onclick="closeModal();openLegal('terms')" style="color:var(--glow);cursor:pointer;text-decoration:underline">Terms & Conditions</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toastEl"></div>
+
+<script>
+// ══ DATA ══
+const PLANS=[
+  {id:'p0',name:'STARTER',invest:10,daily:1.6,days:60,cls:'pc0',badge:'BASIC'},
+  {id:'p1',name:'BASIC',invest:20,daily:3.2,days:60,cls:'pc1',badge:'POPULAR'},
+  {id:'p2',name:'SILVER',invest:40,daily:6.4,days:60,cls:'pc2',badge:'BEST VALUE'},
+  {id:'p3',name:'GOLD',invest:60,daily:9.6,days:60,cls:'pc3',badge:'PREMIUM'},
+  {id:'p4',name:'PLATINUM',invest:80,daily:12.8,days:60,cls:'pc4',badge:'VIP'},
+  {id:'p5',name:'ELITE',invest:100,daily:16,days:60,cls:'pc5',badge:'⭐ TOP'},
+];
+const DEP_ADDR='TKgBiq9giSe2PZcKeE72QQcnUiDwa7AN8q';
+const DEPOSIT_ADDR=DEP_ADDR;
+const REF_COMM_L1=0.15;
+const REF_COMM_L2=0.05;
+const NET_FEE=1;
+
+let wallet=parseFloat(localStorage.getItem('g30_w')||'0');
+let earned=parseFloat(localStorage.getItem('g30_e')||'0');
+let investments=JSON.parse(localStorage.getItem('g30_i')||'[]');
+let deposits=JSON.parse(localStorage.getItem('g30_d')||'[]');
+let withdrawals=JSON.parse(localStorage.getItem('g30_wd')||'[]');
+let referrals=JSON.parse(localStorage.getItem('g30_r')||'[]');
+let refEarned=parseFloat(localStorage.getItem('g30_re')||'0');
+let profile=JSON.parse(localStorage.getItem('g30_p')||'{}');
+let notifOn=localStorage.getItem('g30_notif')==='true';
+let selPlan=null;
+let timers={};
+let liveInterval=null;
+let liveEarned=0;
+
+const JOIN=localStorage.getItem('g30_join')||new Date().toLocaleDateString();
+localStorage.setItem('g30_join',JOIN);
+if(!profile.uid){profile.uid='GPT'+Math.floor(10000+Math.random()*90000);sv()}
+
+// Ref code
+const MY_CODE='GPT30'+(profile.uid||'USER').slice(-5);
+
+function sv(){
+  localStorage.setItem('g30_w',wallet.toFixed(4));
+  localStorage.setItem('g30_e',earned.toFixed(4));
+  localStorage.setItem('g30_i',JSON.stringify(investments));
+  localStorage.setItem('g30_d',JSON.stringify(deposits));
+  localStorage.setItem('g30_wd',JSON.stringify(withdrawals));
+  localStorage.setItem('g30_r',JSON.stringify(referrals));
+  localStorage.setItem('g30_re',refEarned.toFixed(4));
+  localStorage.setItem('g30_p',JSON.stringify(profile));
+}
+
+// ══ PAGE NAV ══
+function goPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  const nb = document.getElementById('nb-'+p);
+  if(nb) nb.classList.add('active');
+  document.querySelector('.main').scrollTop=0;
+  if(p==='investments') renderInv();
+  if(p==='wallet'){updateWBal();drawQR();renderHist();}
+  if(p==='referral') renderRef();
+  if(p==='profile') renderProf();
+  if(p==='leaderboard') renderLB();
+}
+
+// ══ HERO ══
+function updateHero(){
+  document.getElementById('heroBal').innerHTML=wallet.toFixed(2)+' <span>USDT</span>';
+  document.getElementById('heroEarned').textContent='$'+earned.toFixed(2);
+  // Only count truly active (admin approved) investments
+  const active=investments.filter(inv=>inv.claimed<inv.days).length;
+  document.getElementById('heroPlans').textContent=active;
+}
+
+// ══ PLANS ══
+function renderPlans(){
+  document.getElementById('plansList').innerHTML=PLANS.map(p=>`
+  <div class="plan-card ${p.cls}" onclick="openModal('${p.id}')">
+    <div class="pc-top"><div class="pc-name">${p.name}</div><div class="pc-badge">${p.badge}</div></div>
+    <div class="pc-invest">$${p.invest} <em>USDT</em></div>
+    <div class="pc-stats">
+      <div class="pcs"><div class="pcs-l">DAILY</div><div class="pcs-v g">$${p.daily}</div></div>
+      <div class="pcs"><div class="pcs-l">DAYS</div><div class="pcs-v">${p.days}</div></div>
+      <div class="pcs"><div class="pcs-l">RETURN</div><div class="pcs-v gold">$${p.daily*p.days}</div></div>
+    </div>
+    <button class="invest-btn">INVEST NOW →</button>
+  </div>`).join('');
+}
+
+function openModal(id){
+  selPlan=PLANS.find(p=>p.id===id);
+  document.getElementById('mName').textContent=selPlan.name;
+  document.getElementById('mAmt').innerHTML='$'+selPlan.invest+' <em>USDT</em>';
+  document.getElementById('mRows').innerHTML=`
+    <div class="m-row"><span class="mr-l">Daily Earning</span><span class="mr-v g">$${selPlan.daily} USDT</span></div>
+    <div class="m-row"><span class="mr-l">Duration</span><span class="mr-v">${selPlan.days} Days</span></div>
+    <div class="m-row"><span class="mr-l">Daily Return</span><span class="mr-v">16%</span></div>
+    <div class="m-row"><span class="mr-l">Total Return</span><span class="mr-v gold">$${selPlan.daily*selPlan.days} USDT</span></div>
+    <div class="m-row"><span class="mr-l">Claim Cycle</span><span class="mr-v">Every 24 Hours</span></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');selPlan=null}
+function confirmInvest(){
+  if(!selPlan) return;
+  const plan = selPlan; // save reference before closing modal
+  deposits.unshift({
+    id:Date.now(),
+    amount:plan.invest,
+    plan:plan.name,
+    planId:plan.id,
+    date:new Date().toLocaleDateString(),
+    time:new Date().toLocaleTimeString(),
+    status:'pending',
+    type:'investment'
+  });
+  sv();
+  closeModal();
+  setTimeout(()=>showPendingModal(plan), 300); // wait for modal close animation
+}
+
+function showPendingModal(plan){
+  if(!plan) return;
+  const modal = document.getElementById('pendingModal');
+  const pmPlan = document.getElementById('pmPlan');
+  const pmAmt = document.getElementById('pmAmt');
+  if(modal) modal.classList.add('show');
+  if(pmPlan) pmPlan.textContent=plan.name+' PLAN';
+  if(pmAmt) pmAmt.textContent='$'+plan.invest+' USDT';
+}
+function closePendingModal(){
+  document.getElementById('pendingModal').classList.remove('show');
+  goPage('wallet');
+}
+
+// ══ INVESTMENTS ══
+function renderInv(){
+  Object.values(timers).forEach(clearInterval);timers={};
+  const el=document.getElementById('invList');
+
+  // Pending investment deposits
+  const pendingDeps=deposits.filter(d=>d.type==='investment'&&d.status==='pending');
+  const activeInv=investments.filter(inv=>inv.claimed<inv.days);
+
+  if(!activeInv.length&&!pendingDeps.length){
+    el.innerHTML=`<div class="empty-state"><div class="es-icon">📡</div><div class="es-text">No active investments yet</div><button class="es-btn" onclick="goPage('plans')">View Plans →</button></div>`;return;
+  }
+
+  let html='';
+
+  // Show pending deposits first
+  if(pendingDeps.length){
+    html+=`<div class="sec-ttl" style="color:var(--gold)">⏳ AWAITING APPROVAL</div>`;
+    html+=pendingDeps.map(d=>`
+    <div class="pending-card">
+      <div class="pc-pending-top">
+        <div>
+          <div class="pc-pending-name">${d.plan} PLAN</div>
+          <div class="pc-pending-date">Submitted: ${d.date} ${d.time||''}</div>
+        </div>
+        <div class="pc-pending-amt">$${d.amount} USDT</div>
+      </div>
+      <div class="pc-pending-status">
+        <div class="pcs-dot"></div>
+        Waiting for admin deposit approval...
+      </div>
+      <div class="pc-pending-info">
+        Send <strong>$${d.amount} USDT (TRC20)</strong> to deposit address, then wait for admin to activate your plan.
+      </div>
+    </div>`).join('');
+  }
+
+  // Active investments
+  if(activeInv.length){
+    if(pendingDeps.length) html+=`<div class="sec-ttl" style="margin-top:14px">✅ ACTIVE PLANS</div>`;
+    html+=activeInv.map(inv=>{
+      const pct=Math.min(100,(inv.claimed/inv.days)*100).toFixed(1);
+      return`<div class="inv-card" id="ic-${inv.id}">
+        <div class="ic-top"><div class="ic-name">${inv.name} PLAN</div><div class="ic-amt">$${inv.invest} USDT</div></div>
+        <div class="prog-wrap">
+          <div class="prog-top"><span>Day ${inv.claimed} / ${inv.days}</span><span>${pct}%</span></div>
+          <div class="prog-track"><div class="prog-fill" id="pf-${inv.id}" style="width:${pct}%"></div></div>
+        </div>
+        <div class="tc-row">
+          <div class="timer-box"><div class="td" id="td-${inv.id}">--:--:--</div><div class="tsub">NEXT REWARD</div></div>
+          <button class="claim-btn wait" id="cb-${inv.id}" onclick="claimReward(${inv.id})">CLAIM<br><strong>$${inv.daily} USDT</strong></button>
+        </div>
+        <div class="ic-bottom">
+          <div class="ics"><div class="ics-l">EARNED</div><div class="ics-v" id="ie-${inv.id}">$${inv.earnedAmt.toFixed(2)}</div></div>
+          <div class="ics"><div class="ics-l">DAYS LEFT</div><div class="ics-v" style="color:var(--gold)">${inv.days-inv.claimed}</div></div>
+          <div class="ics"><div class="ics-l">TOTAL</div><div class="ics-v" style="color:var(--glow)">$${inv.daily*inv.days}</div></div>
+        </div>
+      </div>`;
+    }).join('');
+    activeInv.forEach(inv=>startTimer(inv));
+  }
+
+  el.innerHTML=html;
+  activeInv.forEach(inv=>startTimer(inv));
+}
+
+function startTimer(inv){
+  function tick(){
+    const diff=inv.nextClaim-Date.now();
+    const td=document.getElementById('td-'+inv.id);
+    const cb=document.getElementById('cb-'+inv.id);
+    if(!td)return;
+    if(diff<=0){
+      td.textContent='00:00:00';
+      if(cb){cb.className='claim-btn ready';cb.innerHTML='CLAIM<br><strong>$'+inv.daily+' USDT</strong>';}
+    }else{
+      const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+      td.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      if(cb){cb.className='claim-btn wait';cb.innerHTML='CLAIM<br><strong>$'+inv.daily+' USDT</strong>';}
+    }
+  }
+  tick();timers[inv.id]=setInterval(tick,1000);
+}
+
+function claimReward(id){
+  const inv=investments.find(i=>i.id===id);
+  if(!inv||Date.now()<inv.nextClaim)return;
+  inv.earnedAmt+=inv.daily;inv.claimed++;inv.nextClaim=Date.now()+86400000;
+  wallet+=inv.daily;earned+=inv.daily;
+  if(inv.claimed>=inv.days){investments=investments.filter(i=>i.id!==id);toast('🎉 Plan Complete!');}
+  else toast('💰 +$'+inv.daily+' USDT Claimed!');
+  sv();updateHero();startLive();renderInv();
+}
+
+// ══ LIVE COUNTER ══
+function getTPS(){return investments.reduce((a,inv)=>inv.claimed<inv.days?a+inv.daily/86400:a,0)}
+function startLive(){
+  if(liveInterval)clearInterval(liveInterval);
+  const tps=getTPS();
+  const box=document.getElementById('liveBox');
+  const amtEl=document.getElementById('liveAmt');
+  const rateEl=document.getElementById('liveRate');
+  // Only show live counter if there are real active investments
+  const activeInv = investments.filter(inv=>inv.claimed<inv.days);
+  if(!activeInv.length||tps===0){if(box)box.style.display='none';return;}
+  if(box)box.style.display='block';
+  if(rateEl)rateEl.textContent=tps.toFixed(6);
+  liveEarned=0; // start from 0 - don't pre-fill with fake time elapsed
+  liveInterval=setInterval(()=>{
+    liveEarned+=tps*0.1;
+    if(amtEl){amtEl.textContent=liveEarned.toFixed(6);amtEl.classList.add('flash');setTimeout(()=>amtEl.classList.remove('flash'),80);}
+    const fill=document.getElementById('lbFill');
+    if(fill&&activeInv[0]){
+      const elapsed=86400000-Math.max(0,activeInv[0].nextClaim-Date.now());
+      fill.style.width=Math.min(100,(elapsed/86400000)*100)+'%';
+    }
+  },100);
+}
+
+// ══ WALLET ══
+function updateWBal(){document.getElementById('wBal').innerHTML=wallet.toFixed(2)+' <span>USDT</span>';}
+function wTab(t){
+  document.querySelectorAll('.w-tab').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.wsec').forEach(el=>el.classList.remove('active'));
+  document.getElementById('wtab-'+t).classList.add('active');
+  document.getElementById('wsec-'+t).classList.add('active');
+}
+function drawQR(){
+  const g=document.getElementById('qrGrid');if(!g||g.innerHTML)return;
+  const addr=DEP_ADDR;let c='';
+  for(let i=0;i<841;i++){
+    const r=Math.floor(i/29),col=i%29;
+    const corner=(r<7&&col<7)||(r<7&&col>21)||(r>21&&col<7);
+    const cc=addr.charCodeAt(i%addr.length);
+    const dark=corner||((cc*(i+1)*7)%13<6);
+    c+=`<div style="width:100%;aspect-ratio:1;background:${dark?'#000':'#fff'}"></div>`;
+  }
+  g.innerHTML=c;
+}
+function copyAddr(){
+  navigator.clipboard.writeText(DEP_ADDR).catch(()=>{});
+  document.getElementById('addrCopyBtn').textContent='✅';
+  toast('📋 Address copied!');
+  setTimeout(()=>{document.getElementById('addrCopyBtn').textContent='📋'},2000);
+}
+function submitDep(){
+  const a=parseFloat(document.getElementById('depAmt').value);
+  if(!a||a<10){toast('❌ Minimum 10 USDT');return;}
+  deposits.unshift({id:Date.now(),amount:a,date:new Date().toLocaleDateString(),status:'pending'});
+  sv();document.getElementById('depAmt').value='';renderHist();toast('⏳ Deposit submitted!');
+}
+function updateReceive(){
+  const a=parseFloat(document.getElementById('witAmt').value)||0;
+  document.getElementById('receiveAmt').textContent=a>NET_FEE?(a-NET_FEE).toFixed(2)+' USDT':'— USDT';
+}
+function setMax(){
+  const a=Math.max(0,wallet-NET_FEE);
+  document.getElementById('witAmt').value=a.toFixed(2);updateReceive();
+}
+function submitWit(){
+  const addr=document.getElementById('witAddr').value.trim();
+  const a=parseFloat(document.getElementById('witAmt').value);
+  if(!addr||addr.length<30){toast('❌ Enter valid TRC20 address');return;}
+  if(!a||a<10){toast('❌ Minimum 10 USDT');return;}
+  if(a>wallet){toast('❌ Insufficient balance');return;}
+  wallet-=a;sv();updateHero();updateWBal();
+  withdrawals.unshift({id:Date.now(),amount:a,receive:(a-NET_FEE),addr:addr.slice(0,8)+'...'+addr.slice(-6),date:new Date().toLocaleDateString(),status:'pending'});
+  sv();document.getElementById('witAddr').value='';document.getElementById('witAmt').value='';
+  renderHist();toast('⏳ Withdrawal submitted!');
+}
+function renderHist(){
+  const dh=document.getElementById('depHist');
+  const wh=document.getElementById('witHist');
+  if(dh)dh.innerHTML=deposits.length?deposits.map(d=>`<div class="hist-item"><div><div class="hi-type">⬇️ Deposit</div><div class="hi-date">${d.date}</div></div><div style="text-align:right"><div class="hi-amt dep">+${d.amount} USDT</div><div class="hi-status ${d.status}">${d.status.toUpperCase()}</div></div></div>`).join(''):'<div class="w-empty">No deposits yet</div>';
+  if(wh)wh.innerHTML=withdrawals.length?withdrawals.map(w=>`<div class="hist-item"><div><div class="hi-type">⬆️ Withdraw</div><div class="hi-date">${w.addr} · ${w.date}</div></div><div style="text-align:right"><div class="hi-amt wit">-${w.amount} USDT</div><div class="hi-status ${w.status}">${w.status.toUpperCase()}</div></div></div>`).join(''):'<div class="w-empty">No withdrawals yet</div>';
+}
+
+// ══ REFERRAL ══
+function renderRef(){
+  document.getElementById('refLinkTxt').textContent='gpt30.app/ref/'+MY_CODE;
+  document.getElementById('refCodeDisp').textContent=MY_CODE;
+
+  const l1 = referrals.filter(r=>r.level===1||!r.level);
+  const l2 = referrals.filter(r=>r.level===2);
+
+  document.getElementById('refCnt').textContent=l1.length;
+  document.getElementById('refCnt2').textContent=l2.length;
+  document.getElementById('refEarned').textContent='$'+refEarned.toFixed(2);
+
+  // Level 1 list
+  const el1=document.getElementById('refList');
+  if(!l1.length){
+    el1.innerHTML='<div class="empty-state" style="padding:20px 0"><div class="es-icon" style="font-size:2rem">👥</div><div class="es-text">No direct referrals yet.</div></div>';
+  } else {
+    el1.innerHTML=l1.map(r=>`
+      <div class="ref-item">
+        <div class="ri-top">
+          <div class="ri-name">👤 ${r.name}</div>
+          <div class="ri-lvl1">LVL 1 · 15%</div>
+        </div>
+        <div class="ri-stats">
+          <div class="ris"><div class="ris-l">THEIR/DAY</div><div class="ris-v" style="color:var(--text)">$${r.fDaily}/day</div></div>
+          <div class="ris"><div class="ris-l">YOU/DAY</div><div class="ris-v" style="color:var(--gold)">$${r.myDaily.toFixed(2)}</div></div>
+          <div class="ris"><div class="ris-l">TOTAL EARNED</div><div class="ris-v" style="color:var(--green)">$${r.earned.toFixed(2)}</div></div>
+        </div>
+      </div>`).join('');
+  }
+
+  // Level 2 list
+  const el2=document.getElementById('refList2');
+  if(!l2.length){
+    el2.innerHTML='<div class="empty-state" style="padding:20px 0"><div class="es-icon" style="font-size:2rem">👥👥</div><div class="es-text">No team referrals yet.</div></div>';
+  } else {
+    el2.innerHTML=l2.map(r=>`
+      <div class="ref-item">
+        <div class="ri-top">
+          <div class="ri-name">👥 ${r.name}</div>
+          <div class="ri-lvl2">LVL 2 · 5%</div>
+        </div>
+        <div class="ri-stats">
+          <div class="ris"><div class="ris-l">THEIR/DAY</div><div class="ris-v" style="color:var(--text)">$${r.fDaily}/day</div></div>
+          <div class="ris"><div class="ris-l">YOU/DAY</div><div class="ris-v" style="color:#c060ff">$${r.myDaily.toFixed(2)}</div></div>
+          <div class="ris"><div class="ris-l">TOTAL EARNED</div><div class="ris-v" style="color:var(--green)">$${r.earned.toFixed(2)}</div></div>
+        </div>
+      </div>`).join('');
+  }
+}
+function copyRef(){
+  navigator.clipboard.writeText('https://gpt30.app/ref/'+MY_CODE).catch(()=>{});
+  document.getElementById('refCopyBtn').textContent='✓ COPIED';
+  toast('🔗 Referral link copied!');
+  setTimeout(()=>{document.getElementById('refCopyBtn').textContent='COPY'},2000);
+}
+
+
+// ══ PROFILE ══
+function renderProf(){
+  const n=profile.name||'GPT30 User';
+  document.getElementById('profAv').textContent=n.charAt(0).toUpperCase();
+  document.getElementById('profNameDisp').textContent=n;
+  document.getElementById('profUID').textContent=profile.uid;
+  document.getElementById('profJoined').textContent=JOIN;
+  document.getElementById('editName').value=profile.name||'';
+  document.getElementById('editEmail').value=profile.email||'';
+  document.getElementById('editPhone').value=profile.phone||'';
+  document.getElementById('psTotalE').textContent='$'+earned.toFixed(2);
+  document.getElementById('psPlans').textContent=investments.length;
+  document.getElementById('psRefs').textContent=referrals.length;
+  let lvl='Starter';
+  if(earned>=500)lvl='💎 Diamond';else if(earned>=200)lvl='🥇 Gold';else if(earned>=100)lvl='🥈 Silver';else if(earned>=50)lvl='🥉 Bronze';
+  document.getElementById('psLevel').textContent=lvl;
+  document.getElementById('notifTog').classList.toggle('on',notifOn);
+}
+function saveProf(){
+  const n=document.getElementById('editName').value.trim();
+  if(!n){toast('❌ Enter your name');return;}
+  profile.name=n;profile.email=document.getElementById('editEmail').value.trim();
+  profile.phone=document.getElementById('editPhone').value.trim();
+  sv();
+  document.getElementById('profAv').textContent=n.charAt(0).toUpperCase();
+  document.getElementById('profNameDisp').textContent=n;
+  toast('✅ Profile saved!');
+}
+function toggleNotif(){
+  notifOn=!notifOn;localStorage.setItem('g30_notif',notifOn);
+  document.getElementById('notifTog').classList.toggle('on',notifOn);
+  toast(notifOn?'🔔 Notifications ON':'🔕 Notifications OFF');
+}
+function doLogout(){if(confirm('Logout?')){localStorage.clear();location.reload();}}
+function doReset(){if(confirm('Clear all data? This will reset everything.')){localStorage.clear();location.reload();}}
+
+// ══ TOAST ══
+function toast(msg){
+  const t=document.getElementById('toastEl');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+
+
+// ── SPLASH SCREEN ──
+const splashSteps = ['Initializing...','Loading plans...','Syncing data...','Connecting AI...','Ready! 🚀'];
+let splashIdx = 0;
+function runSplash(){
+  const fill = document.getElementById('slFill');
+  const text = document.getElementById('slText');
+  const pct = [10,30,55,80,100];
+  const interval = setInterval(()=>{
+    if(splashIdx >= splashSteps.length){
+      clearInterval(interval);
+      setTimeout(()=>{
+        document.getElementById('splash').classList.add('hide');
+        setTimeout(()=>{document.getElementById('splash').style.display='none'},600);
+      },300);
+      return;
+    }
+    if(fill) fill.style.width = pct[splashIdx]+'%';
+    if(text) text.textContent = splashSteps[splashIdx];
+    splashIdx++;
+  },500);
+}
+runSplash();
+
+// ── ANNOUNCEMENT ──
+function closeAnnounce(){
+  const bar = document.getElementById('announceBar');
+  if(bar){bar.style.height='0';bar.style.padding='0';bar.style.overflow='hidden';bar.style.transition='all 0.3s';}
+}
+
+// ── LEADERBOARD ──
+const FAKE_LEADERS = [
+  {name:'Ali Hassan',earned:4820,refs:12,av:'A'},
+  {name:'Sara Khan',earned:3650,refs:9,av:'S'},
+  {name:'Usman Malik',earned:2940,refs:7,av:'U'},
+  {name:'Fatima R.',earned:2100,refs:5,av:'F'},
+  {name:'Ahmed B.',earned:1850,refs:8,av:'A'},
+  {name:'Zara S.',earned:1420,refs:3,av:'Z'},
+  {name:'Bilal K.',earned:1200,refs:6,av:'B'},
+  {name:'Hina T.',earned:980,refs:2,av:'H'},
+  {name:'Omar F.',earned:760,refs:4,av:'O'},
+  {name:'Nadia M.',earned:540,refs:1,av:'N'},
+];
+let lbMode = 'earned';
+function lbFilter(mode){
+  lbMode = mode;
+  document.querySelectorAll('.lb-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&mode==='earned')||(i===1&&mode==='referral')));
+  renderLB();
+}
+function renderLB(){
+  const myName = profile.name || 'You';
+  document.getElementById('lbMyName').textContent = myName;
+  document.getElementById('lbMyEarned').textContent = '$'+earned.toFixed(2);
+  const sorted = [...FAKE_LEADERS].sort((a,b)=>lbMode==='earned'?b.earned-a.earned:b.refs-a.refs);
+  const ranks = ['r1','r2','r3'];
+  const medals = ['🥇','🥈','🥉'];
+  document.getElementById('lbList').innerHTML = sorted.map((u,i)=>`
+    <div class="lb-item">
+      <div class="lb-rank ${i<3?ranks[i]:'rn'}">${i<3?medals[i]:'#'+(i+1)}</div>
+      <div class="lb-av">${u.av}</div>
+      <div class="lb-info">
+        <div class="lb-uname">${u.name}</div>
+        <div class="lb-detail">${lbMode==='earned'?u.refs+' referrals':'$'+u.earned.toFixed(0)+' earned'}</div>
+      </div>
+      <div class="lb-val">${lbMode==='earned'?'$'+u.earned.toFixed(0):u.refs+' refs'}</div>
+    </div>`).join('');
+}
+
+// ── TELEGRAM SUPPORT ──
+function openTelegram(){
+  window.open('https://t.me/GPT30Support','_blank');
+}
+
+
+// ══ LEGAL PAGES ══
+const TERMS_CONTENT = `
+<div class="lm-section">
+  <div class="lm-section-title">1. Acceptance of Terms</div>
+  <div class="lm-text">By accessing and using GPT30 AI Investment Platform, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our platform.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">2. Investment Plans</div>
+  <div class="lm-text">GPT30 offers AI-powered investment plans with fixed daily returns. All investment plans are subject to the following conditions:</div>
+  <div class="lm-badge">
+    • Minimum investment: <strong>$10 USDT</strong><br>
+    • Daily return: <strong>16% of investment</strong><br>
+    • Duration: <strong>60 days</strong><br>
+    • Network: <strong>USDT TRC20 only</strong>
+  </div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">3. Deposits & Withdrawals</div>
+  <div class="lm-text">All deposits must be made in <strong>USDT via the TRC20 network</strong>. GPT30 is not responsible for funds sent to incorrect addresses or via unsupported networks. Withdrawals are processed within <strong>24 hours</strong> after request submission. A network fee of <strong>1 USDT</strong> applies to all withdrawals.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">4. Referral Program</div>
+  <div class="lm-text">Users may earn a <strong>15% commission</strong> on their referred users' daily earnings. Referral commissions are credited automatically each day. GPT30 reserves the right to modify or terminate the referral program at any time.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">5. Account Responsibility</div>
+  <div class="lm-text">You are responsible for maintaining the confidentiality of your account credentials. GPT30 is not liable for any loss resulting from unauthorized access to your account. Each user may maintain only <strong>one active account</strong>.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">6. Risk Disclosure</div>
+  <div class="lm-text">All investments carry risk. Past performance does not guarantee future returns. GPT30 AI Investment Platform does not guarantee profits. Please invest only what you can afford to lose. You acknowledge that cryptocurrency investments are volatile in nature.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">7. Prohibited Activities</div>
+  <div class="lm-text">Users are strictly prohibited from:<br><br>
+  • Creating multiple accounts to abuse bonuses<br>
+  • Using bots or automated systems<br>
+  • Money laundering or fraudulent activities<br>
+  • Sharing false referral information<br><br>
+  Violations will result in immediate account suspension and forfeiture of funds.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">8. Modifications</div>
+  <div class="lm-text">GPT30 reserves the right to modify these terms at any time. Continued use of the platform after changes constitutes acceptance of the new terms.</div>
+</div>
+<div class="lm-last">Last updated: June 2025 · GPT30 AI Investment Platform</div>
+`;
+
+const PRIVACY_CONTENT = `
+<div class="lm-section">
+  <div class="lm-section-title">1. Information We Collect</div>
+  <div class="lm-text">GPT30 collects the following information to provide our services:</div>
+  <div class="lm-badge">
+    • Name and contact information<br>
+    • Wallet addresses (TRC20/USDT)<br>
+    • Transaction history<br>
+    • Device and usage data<br>
+    • Referral activity
+  </div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">2. How We Use Your Data</div>
+  <div class="lm-text">Your information is used exclusively for:<br><br>
+  • Processing deposits and withdrawals<br>
+  • Calculating and crediting daily returns<br>
+  • Managing referral commissions<br>
+  • Providing customer support<br>
+  • Preventing fraud and abuse</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">3. Data Security</div>
+  <div class="lm-text">We implement industry-standard security measures to protect your personal information. All data is <strong>encrypted in transit and at rest</strong>. We use secure servers and regularly audit our security practices. However, no method of transmission over the internet is 100% secure.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">4. Wallet Privacy</div>
+  <div class="lm-text">Your <strong>TRC20 wallet address</strong> is used solely for processing transactions. We never share your wallet address with third parties. All transaction records are maintained for compliance and audit purposes only.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">5. Referral Data</div>
+  <div class="lm-text">When you use a referral link, we record the referral relationship to credit commissions accurately. Referral codes and earnings are visible only to the account holder and platform administrators.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">6. Data Sharing</div>
+  <div class="lm-text">GPT30 does <strong>not sell, rent, or trade</strong> your personal information to third parties. We may share data only when required by law or to prevent fraud. All third-party service providers are bound by strict confidentiality agreements.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">7. Cookies & Local Storage</div>
+  <div class="lm-text">GPT30 uses local storage on your device to save your session, preferences, and investment data. This data remains on your device and is not transmitted to external servers without your consent.</div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">8. Your Rights</div>
+  <div class="lm-text">You have the right to:<br><br>
+  • Access your personal data at any time<br>
+  • Request deletion of your account and data<br>
+  • Opt out of non-essential communications<br>
+  • Lodge a complaint with relevant authorities<br><br>
+  To exercise these rights, contact us at <strong style="color:var(--glow)">support@gpt30.app</strong></div>
+</div>
+<div class="lm-section">
+  <div class="lm-section-title">9. Contact Us</div>
+  <div class="lm-text">For any privacy-related questions or concerns, please contact our Data Protection team at <strong style="color:var(--glow)">privacy@gpt30.app</strong> or via our Telegram support channel <strong style="color:var(--glow)">@GPT30Support</strong>.</div>
+</div>
+<div class="lm-last">Last updated: June 2025 · GPT30 AI Investment Platform</div>
+`;
+
+function openLegal(type){
+  const modal = document.getElementById('legalModal');
+  const title = document.getElementById('lmTitle');
+  const body = document.getElementById('lmBody');
+  if(type==='terms'){
+    title.textContent = '📋 Terms & Conditions';
+    body.innerHTML = TERMS_CONTENT;
+  } else {
+    title.textContent = '🔒 Privacy Policy';
+    body.innerHTML = PRIVACY_CONTENT;
+  }
+  modal.classList.add('show');
+  body.scrollTop = 0;
+}
+function closeLegal(){
+  document.getElementById('legalModal').classList.remove('show');
+}
+
+
+// ══ INIT ══
+// VERSION CHECK - if version mismatch, clear old data
+const APP_VER = 'v3.0';
+const savedVer = localStorage.getItem('g30_ver');
+if(savedVer !== APP_VER){
+  // New version - clear ALL old data
+  localStorage.clear();
+  wallet=0; earned=0; investments=[]; deposits=[]; withdrawals=[]; referrals=[]; refEarned=0; profile={};
+  localStorage.setItem('g30_ver', APP_VER);
+  profile.uid='GPT'+Math.floor(10000+Math.random()*90000);
+  sv();
+}
+
+renderPlans();updateHero();startLive();
+
+// ── SHARE FUNCTIONS ──
+function getShareMsg(){
+  const link='https://gpt30.app/ref/'+MY_CODE;
+  return '🚀 *GPT30 AI Investment Platform*\n\n💰 Earn *16% daily returns* on your investment!\n👥 Join me and start earning today!\n\n✅ Plans starting from just *$10 USDT*\n⚡ Daily payouts • 60-day plans\n🎁 Referral bonuses available\n\n🔗 Join here: '+link+'\n\nUse my code: *'+MY_CODE+'*';
+}
+function shareWA(){
+  const msg=encodeURIComponent(getShareMsg());
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+function shareFB(){
+  const link=encodeURIComponent('https://gpt30.app/ref/'+MY_CODE);
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+link,'_blank');
+}
+function shareTG(){
+  const link='https://gpt30.app/ref/'+MY_CODE;
+  const msg=encodeURIComponent(getShareMsg());
+  window.open('https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+msg,'_blank');
+}
+function shareTwitter(){
+  const msg=encodeURIComponent('🚀 Join GPT30 AI Investment! Earn 16% daily. Use my ref: https://gpt30.app/ref/'+MY_CODE);
+  window.open('https://twitter.com/intent/tweet?text='+msg,'_blank');
+}
+function shareNative(){
+  const link='https://gpt30.app/ref/'+MY_CODE;
+  if(navigator.share){
+    navigator.share({title:'GPT30 AI Investment',text:getShareMsg(),url:link}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(link).catch(()=>{});
+    toast('🔗 Link copied!');
+  }
+}
+
+
+// ── PWA INSTALL ──
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  const bar = document.getElementById('installBar');
+  if(bar && !localStorage.getItem('g30_install_dismissed')){
+    setTimeout(()=>bar.style.display='flex', 3000);
+  }
+});
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(r=>{
+      if(r.outcome==='accepted') toast('✅ App installed!');
+      deferredPrompt=null;
+      document.getElementById('installBar').style.display='none';
+    });
+  } else {
+    toast('📱 Open in Chrome & tap "Add to Home Screen"');
+  }
+}
+function dismissInstall(){
+  document.getElementById('installBar').style.display='none';
+  localStorage.setItem('g30_install_dismissed','1');
+}
+window.addEventListener('appinstalled',()=>{
+  toast('🎉 GPT30 App installed!');
+  document.getElementById('installBar').style.display='none';
+});
+
+// ── SERVICE WORKER ──
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+
+</script>
+</body>
+</html>

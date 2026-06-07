@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>GPT30 Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#02040e;--surface:#060c1c;--card:#090f22;--border:#0f1e44;
+  --glow:#00e5ff;--glow2:#0055ff;--gold:#ffd166;--green:#00f5a0;
+  --red:#ff4d6d;--orange:#ff9100;--text:#cde4ff;--muted:#2e4a75;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif}
+body{min-height:100vh}
+
+/* BG */
+.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);
+  background-size:30px 30px}
+
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;z-index:100;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;padding:20px}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:24px;
+  padding:36px 24px;width:100%;max-width:380px;position:relative;overflow:hidden}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;
+  background:linear-gradient(135deg,#fff,var(--glow));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-align:center;margin-bottom:4px}
+.login-sub{text-align:center;font-family:'Space Mono',monospace;font-size:0.6rem;
+  letter-spacing:3px;color:var(--muted);margin-bottom:28px}
+.login-field{margin-bottom:14px}
+.lf-label{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;
+  color:var(--muted);margin-bottom:7px}
+.lf-inp{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;
+  font-family:'DM Sans',sans-serif;transition:border 0.3s}
+.lf-inp:focus{border-color:var(--glow)}
+.lf-inp::placeholder{color:var(--muted)}
+.login-btn{width:100%;padding:15px;border-radius:13px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;
+  margin-top:8px;box-shadow:0 6px 24px rgba(0,229,255,0.2)}
+.login-err{color:var(--red);font-size:0.78rem;text-align:center;margin-top:10px;display:none}
+
+/* APP */
+.admin-app{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;
+  display:flex;flex-direction:column;display:none}
+
+/* TOP NAV */
+.admin-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px 10px;background:rgba(2,4,14,0.95);
+  backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,0,0,0.15);
+  position:sticky;top:0;z-index:40}
+.an-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
+  color:var(--red)}
+.an-logo span{color:var(--glow);font-size:0.9rem;margin-left:6px}
+.an-badge{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.25);
+  border-radius:50px;padding:4px 12px;font-family:'Space Mono',monospace;
+  font-size:0.58rem;color:var(--red)}
+.logout-btn{background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.2);
+  border-radius:8px;padding:6px 12px;color:var(--red);font-size:0.75rem;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700}
+
+/* MAIN */
+.admin-main{flex:1;overflow-y:auto;padding:14px 14px 30px}
+
+/* STATS ROW */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sc-users::before{background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.sc-deps::before{background:linear-gradient(90deg,#006030,var(--green))}
+.sc-withs::before{background:linear-gradient(90deg,#7a5000,var(--gold))}
+.sc-earn::before{background:linear-gradient(90deg,#6600aa,#c060ff)}
+.sc-icon{font-size:1.4rem;margin-bottom:8px}
+.sc-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:#fff}
+.sc-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;
+  color:var(--muted);margin-top:3px}
+
+/* SEC TITLE */
+.sec-ttl{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:4px;
+  color:var(--muted);margin-bottom:10px;margin-top:16px}
+
+/* TABS */
+.admin-tabs{display:flex;background:var(--surface);border:1px solid var(--border);
+  border-radius:13px;padding:4px;gap:4px;margin-bottom:14px;overflow-x:auto}
+.at{flex-shrink:0;padding:9px 14px;border-radius:9px;border:none;cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;
+  color:var(--muted);background:transparent;transition:all 0.3s;white-space:nowrap}
+.at.active{background:linear-gradient(135deg,var(--red),#ff6b6b);color:#fff}
+
+/* TABLE CARDS */
+.table-wrap{display:flex;flex-direction:column;gap:10px}
+.dep-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px;position:relative;overflow:hidden}
+.dep-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.dep-card.pending::before{background:linear-gradient(90deg,#7a5000,var(--gold))}
+.dep-card.approved::before{background:linear-gradient(90deg,#006030,var(--green))}
+.dep-card.rejected::before{background:linear-gradient(90deg,#6a0020,var(--red))}
+.dc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.dc-user{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff}
+.dc-date{font-size:0.68rem;color:var(--muted);margin-top:2px}
+.dc-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--gold)}
+.dc-plan{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);margin-top:2px;text-align:right}
+.dc-status{display:inline-flex;align-items:center;gap:5px;border-radius:50px;
+  padding:3px 10px;font-family:'Space Mono',monospace;font-size:0.55rem;margin-bottom:10px}
+.dc-status.pending{background:rgba(255,145,0,0.1);border:1px solid rgba(255,145,0,0.25);color:var(--orange)}
+.dc-status.approved{background:rgba(0,245,160,0.1);border:1px solid rgba(0,245,160,0.25);color:var(--green)}
+.dc-status.rejected{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.25);color:var(--red)}
+.dc-actions{display:flex;gap:8px}
+.dc-approve{flex:1;padding:10px;border-radius:10px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#006030,var(--green));color:#000;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem}
+.dc-reject{flex:1;padding:10px;border-radius:10px;cursor:pointer;
+  background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);
+  color:var(--red);font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem}
+.dc-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.dci{background:rgba(255,255,255,0.03);border-radius:9px;padding:8px 10px}
+.dci-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.dci-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;margin-top:2px}
+
+/* USER CARDS */
+.user-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.user-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--glow2),var(--glow))}
+.uc-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.uc-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--glow2),var(--glow));
+  display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#000;flex-shrink:0}
+.uc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff}
+.uc-uid{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);margin-top:2px}
+.uc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.ucs{background:rgba(255,255,255,0.03);border-radius:9px;padding:8px;text-align:center}
+.ucs-l{font-size:0.5rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.ucs-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:var(--green);margin-top:2px}
+.uc-actions{display:flex;gap:8px}
+.uc-ban{flex:1;padding:9px;border-radius:9px;border:1px solid rgba(255,77,109,0.25);
+  background:rgba(255,77,109,0.06);color:var(--red);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;cursor:pointer}
+.uc-msg{flex:1;padding:9px;border-radius:9px;border:1px solid rgba(0,229,255,0.2);
+  background:rgba(0,229,255,0.05);color:var(--glow);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;cursor:pointer}
+
+/* ANNOUNCE EDITOR */
+.announce-editor{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px}
+.ae-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--glow);margin-bottom:14px}
+.ae-inp{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:11px;padding:13px;color:#fff;font-size:16px;outline:none;
+  font-family:'DM Sans',sans-serif;resize:vertical;min-height:80px;margin-bottom:10px}
+.ae-inp:focus{border-color:var(--glow)}
+.ae-inp::placeholder{color:var(--muted)}
+.ae-send{width:100%;padding:13px;border-radius:12px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:1px}
+
+/* SETTINGS */
+.setting-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px}
+.setting-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:var(--gold);margin-bottom:12px}
+.setting-row{display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.setting-row:last-child{border-bottom:none;padding-bottom:0}
+.sr-label{font-size:0.85rem;color:#fff}
+.sr-sub{font-size:0.68rem;color:var(--muted);margin-top:1px}
+.sr-val{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--green);font-weight:700}
+
+/* EMPTY */
+.admin-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:0.85rem}
+.ae-icon{font-size:2.5rem;opacity:0.4;margin-bottom:10px}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+  opacity:0;background:var(--card);border:1px solid rgba(0,245,160,0.3);
+  color:var(--green);padding:11px 22px;border-radius:50px;
+  font-family:'Space Mono',monospace;font-size:0.66rem;letter-spacing:1px;
+  z-index:200;transition:all 0.35s;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">GPT30</div>
+    <div class="login-sub">🔐 ADMIN PANEL</div>
+    <div class="login-field">
+      <div class="lf-label">USERNAME</div>
+      <input class="lf-inp" id="adminUser" placeholder="Enter admin username..." />
+    </div>
+    <div class="login-field">
+      <div class="lf-label">PASSWORD</div>
+      <input class="lf-inp" id="adminPass" placeholder="Enter admin password..." type="password" />
+    </div>
+    <button class="login-btn" onclick="doLogin()">🔓 LOGIN TO ADMIN</button>
+    <div class="login-err" id="loginErr">❌ Invalid credentials!</div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div class="admin-app" id="adminApp">
+  <!-- NAV -->
+  <div class="admin-nav">
+    <div>
+      <div class="an-logo">GPT30 <span>ADMIN</span></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="an-badge">🔴 LIVE</div>
+      <button class="logout-btn" onclick="adminLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- STATS -->
+    <div class="sec-ttl" style="margin-top:0">OVERVIEW</div>
+    <div class="stats-grid">
+      <div class="stat-card sc-users">
+        <div class="sc-icon">👥</div>
+        <div class="sc-val" id="stUsers">0</div>
+        <div class="sc-label">TOTAL USERS</div>
+      </div>
+      <div class="stat-card sc-deps">
+        <div class="sc-icon">💰</div>
+        <div class="sc-val" id="stDeps">$0</div>
+        <div class="sc-label">TOTAL DEPOSITS</div>
+      </div>
+      <div class="stat-card sc-withs">
+        <div class="sc-icon">📤</div>
+        <div class="sc-val" id="stWiths">$0</div>
+        <div class="sc-label">WITHDRAWALS</div>
+      </div>
+      <div class="stat-card sc-earn">
+        <div class="sc-icon">⏳</div>
+        <div class="sc-val" id="stPending">0</div>
+        <div class="sc-label">PENDING</div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="admin-tabs">
+      <button class="at active" onclick="adminTab('deposits')">💰 Deposits</button>
+      <button class="at" onclick="adminTab('withdrawals')">📤 Withdrawals</button>
+      <button class="at" onclick="adminTab('users')">👥 Users</button>
+      <button class="at" onclick="adminTab('announce')">📣 Announce</button>
+      <button class="at" onclick="adminTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- DEPOSIT REQUESTS -->
+    <div id="tab-deposits">
+      <div class="sec-ttl">PENDING DEPOSIT REQUESTS</div>
+      <div class="table-wrap" id="depList"></div>
+    </div>
+
+    <!-- WITHDRAWAL REQUESTS -->
+    <div id="tab-withdrawals" style="display:none">
+      <div class="sec-ttl">PENDING WITHDRAWAL REQUESTS</div>
+      <div class="table-wrap" id="withList"></div>
+    </div>
+
+    <!-- USERS -->
+    <div id="tab-users" style="display:none">
+      <div class="sec-ttl">ALL USERS</div>
+      <div class="table-wrap" id="userList"></div>
+    </div>
+
+    <!-- ANNOUNCEMENT -->
+    <div id="tab-announce" style="display:none">
+      <div class="sec-ttl">SEND ANNOUNCEMENT</div>
+      <div class="announce-editor">
+        <div class="ae-title">📣 Broadcast Message</div>
+        <textarea class="ae-inp" id="announceText" placeholder="Type your announcement here... e.g. 🎉 Special bonus this week! Earn extra 5% on all investments..."></textarea>
+        <button class="ae-send" onclick="sendAnnounce()">📤 SEND ANNOUNCEMENT</button>
+      </div>
+      <div class="sec-ttl">SENT ANNOUNCEMENTS</div>
+      <div id="announceList"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="tab-settings" style="display:none">
+      <div class="sec-ttl">APP SETTINGS</div>
+      <div class="setting-card">
+        <div class="setting-title">💰 Investment Settings</div>
+        <div class="setting-row">
+          <div><div class="sr-label">Daily Return Rate</div><div class="sr-sub">All plans</div></div>
+          <div class="sr-val">16%</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Plan Duration</div><div class="sr-sub">Fixed for all plans</div></div>
+          <div class="sr-val">60 Days</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Referral Commission</div><div class="sr-sub">On daily earnings</div></div>
+          <div class="sr-val">15%</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Min Deposit</div><div class="sr-sub">Starter plan</div></div>
+          <div class="sr-val">$10 USDT</div>
+        </div>
+      </div>
+      <div class="setting-card">
+        <div class="setting-title">💸 Withdrawal Settings</div>
+        <div class="setting-row">
+          <div><div class="sr-label">Network Fee</div><div class="sr-sub">Per withdrawal</div></div>
+          <div class="sr-val">1 USDT</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Min Withdrawal</div></div>
+          <div class="sr-val">$10 USDT</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Processing Time</div></div>
+          <div class="sr-val">24 Hours</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Network</div></div>
+          <div class="sr-val">TRC20</div>
+        </div>
+      </div>
+      <div class="setting-card">
+        <div class="setting-title">🔐 Admin Credentials</div>
+        <div class="setting-row">
+          <div><div class="sr-label">Username</div></div>
+          <div class="sr-val">admin</div>
+        </div>
+        <div class="setting-row">
+          <div><div class="sr-label">Password</div></div>
+          <div class="sr-val">gpt30@admin</div>
+        </div>
+      </div>
+      <div class="setting-card">
+        <div class="setting-title">💳 Deposit Address</div>
+        <div style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--glow);
+          background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);
+          border-radius:10px;padding:12px;word-break:break-all;line-height:1.6">
+          TKgBiq9giSe2PZcKeE72QQcnUiDwa7AN8q
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toastEl"></div>
+
+<script>
+// ── ADMIN CREDENTIALS ──
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'gpt30@admin';
+
+// ── AUTH ──
+function doLogin(){
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value.trim();
+  if(u === ADMIN_USER && p === ADMIN_PASS){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'flex';
+    document.getElementById('adminApp').style.flexDirection = 'column';
+    loadData();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    setTimeout(()=>document.getElementById('loginErr').style.display='none', 2000);
+  }
+}
+
+// Enter key login
+document.addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function adminLogout(){
+  if(confirm('Logout from admin?')){
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminApp').style.display = 'none';
+    document.getElementById('adminUser').value = '';
+    document.getElementById('adminPass').value = '';
+  }
+}
+
+// ── LOAD DATA FROM LOCALSTORAGE (shared with main app) ──
+let deposits = [];
+let withdrawals = [];
+let investments = [];
+let announces = JSON.parse(localStorage.getItem('gpt30_announces') || '[]');
+
+function loadData(){
+  // Load from main app localStorage
+  deposits = JSON.parse(localStorage.getItem('g30_d') || '[]');
+  withdrawals = JSON.parse(localStorage.getItem('g30_wd') || '[]');
+  investments = JSON.parse(localStorage.getItem('g30_i') || '[]');
+
+  // Update stats
+  const pending = deposits.filter(d=>d.status==='pending').length +
+                  withdrawals.filter(w=>w.status==='pending').length;
+  document.getElementById('stUsers').textContent = '1';
+  document.getElementById('stDeps').textContent = '$' + deposits.reduce((a,d)=>a+d.amount,0).toFixed(0);
+  document.getElementById('stWiths').textContent = '$' + withdrawals.reduce((a,w)=>a+w.amount,0).toFixed(0);
+  document.getElementById('stPending').textContent = pending;
+
+  renderDeposits();
+  renderWithdrawals();
+  renderUsers();
+  renderAnnounces();
+}
+
+// ── TABS ──
+function adminTab(t){
+  ['deposits','withdrawals','users','announce','settings'].forEach(s=>{
+    document.getElementById('tab-'+s).style.display = s===t?'block':'none';
+  });
+  document.querySelectorAll('.at').forEach((el,i)=>{
+    el.classList.toggle('active',
+      (i===0&&t==='deposits')||(i===1&&t==='withdrawals')||
+      (i===2&&t==='users')||(i===3&&t==='announce')||(i===4&&t==='settings'));
+  });
+}
+
+// ── DEPOSITS ──
+function renderDeposits(){
+  const el = document.getElementById('depList');
+  const pending = deposits.filter(d=>d.type==='investment');
+  if(!pending.length){
+    el.innerHTML='<div class="admin-empty"><div class="ae-icon">📭</div>No deposit requests yet</div>';return;
+  }
+  el.innerHTML = pending.map(d=>`
+    <div class="dep-card ${d.status}" id="dc-${d.id}">
+      <div class="dc-top">
+        <div>
+          <div class="dc-user">👤 User</div>
+          <div class="dc-date">${d.date} ${d.time||''}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="dc-amt">$${d.amount} USDT</div>
+          <div class="dc-plan">${d.plan||'—'} Plan</div>
+        </div>
+      </div>
+      <div class="dc-info">
+        <div class="dci"><div class="dci-l">PLAN</div><div class="dci-v">${d.plan||'—'}</div></div>
+        <div class="dci"><div class="dci-l">NETWORK</div><div class="dci-v" style="color:var(--gold)">TRC20</div></div>
+      </div>
+      <div class="dc-status ${d.status}">
+        ${d.status==='pending'?'⏳ PENDING':d.status==='approved'?'✅ APPROVED':'❌ REJECTED'}
+      </div>
+      ${d.status==='pending'?`
+      <div class="dc-actions">
+        <button class="dc-approve" onclick="approveDeposit(${d.id})">✅ APPROVE</button>
+        <button class="dc-reject" onclick="rejectDeposit(${d.id})">❌ REJECT</button>
+      </div>`:''}
+    </div>`).join('');
+}
+
+function approveDeposit(id){
+  const dep = deposits.find(d=>d.id===id);
+  if(!dep) return;
+  dep.status = 'approved';
+
+  // Activate investment in main app
+  const PLANS = {
+    'STARTER':{invest:10,daily:1.6},'BASIC':{invest:20,daily:3.2},
+    'SILVER':{invest:40,daily:6.4},'GOLD':{invest:60,daily:9.6},
+    'PLATINUM':{invest:80,daily:12.8},'ELITE':{invest:100,daily:16}
+  };
+  const plan = PLANS[dep.plan];
+  if(plan){
+    let invs = JSON.parse(localStorage.getItem('g30_i')||'[]');
+    invs.push({
+      id:Date.now(),name:dep.plan,invest:dep.amount,daily:plan.daily,
+      days:60,claimed:0,earnedAmt:0,nextClaim:Date.now()+86400000,cls:'pc0'
+    });
+    localStorage.setItem('g30_i', JSON.stringify(invs));
+  }
+  localStorage.setItem('g30_d', JSON.stringify(deposits));
+  renderDeposits();
+  loadData();
+  toast('✅ Deposit approved! Plan activated.');
+}
+
+function rejectDeposit(id){
+  if(!confirm('Reject this deposit?')) return;
+  const dep = deposits.find(d=>d.id===id);
+  if(dep) dep.status = 'rejected';
+  localStorage.setItem('g30_d', JSON.stringify(deposits));
+  renderDeposits();
+  loadData();
+  toast('❌ Deposit rejected.');
+}
+
+// ── WITHDRAWALS ──
+function renderWithdrawals(){
+  const el = document.getElementById('withList');
+  if(!withdrawals.length){
+    el.innerHTML='<div class="admin-empty"><div class="ae-icon">📭</div>No withdrawal requests yet</div>';return;
+  }
+  el.innerHTML = withdrawals.map(w=>`
+    <div class="dep-card ${w.status}">
+      <div class="dc-top">
+        <div>
+          <div class="dc-user">👤 User</div>
+          <div class="dc-date">${w.addr||'—'} · ${w.date}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="dc-amt">$${w.amount} USDT</div>
+          <div class="dc-plan">Receives: $${w.receive||w.amount-1}</div>
+        </div>
+      </div>
+      <div class="dc-status ${w.status}">
+        ${w.status==='pending'?'⏳ PENDING':w.status==='approved'?'✅ SENT':'❌ REJECTED'}
+      </div>
+      ${w.status==='pending'?`
+      <div class="dc-actions">
+        <button class="dc-approve" onclick="approveWith(${w.id})">✅ MARK SENT</button>
+        <button class="dc-reject" onclick="rejectWith(${w.id})">❌ REJECT</button>
+      </div>`:''}
+    </div>`).join('');
+}
+
+function approveWith(id){
+  const w = withdrawals.find(x=>x.id===id);
+  if(w) w.status = 'approved';
+  localStorage.setItem('g30_wd', JSON.stringify(withdrawals));
+  renderWithdrawals();loadData();
+  toast('✅ Withdrawal marked as sent!');
+}
+function rejectWith(id){
+  if(!confirm('Reject this withdrawal? Amount will be refunded.')) return;
+  const w = withdrawals.find(x=>x.id===id);
+  if(w){
+    w.status='rejected';
+    // Refund to wallet
+    let bal = parseFloat(localStorage.getItem('g30_w')||'0');
+    bal += w.amount;
+    localStorage.setItem('g30_w', bal.toFixed(4));
+  }
+  localStorage.setItem('g30_wd', JSON.stringify(withdrawals));
+  renderWithdrawals();loadData();
+  toast('❌ Withdrawal rejected & refunded.');
+}
+
+// ── USERS ──
+function renderUsers(){
+  const el = document.getElementById('userList');
+  const prof = JSON.parse(localStorage.getItem('g30_p')||'{}');
+  const wallet = parseFloat(localStorage.getItem('g30_w')||'0');
+  const earned = parseFloat(localStorage.getItem('g30_e')||'0');
+  const invs = JSON.parse(localStorage.getItem('g30_i')||'[]');
+  const refs = JSON.parse(localStorage.getItem('g30_r')||'[]');
+
+  if(!prof.uid){
+    el.innerHTML='<div class="admin-empty"><div class="ae-icon">👥</div>No users yet</div>';return;
+  }
+
+  el.innerHTML = `
+    <div class="user-card">
+      <div class="uc-top">
+        <div class="uc-av">${(prof.name||'U').charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="uc-name">${prof.name||'GPT30 User'}</div>
+          <div class="uc-uid">UID: ${prof.uid} · ${prof.email||'No email'}</div>
+        </div>
+      </div>
+      <div class="uc-stats">
+        <div class="ucs"><div class="ucs-l">BALANCE</div><div class="ucs-v">$${wallet.toFixed(2)}</div></div>
+        <div class="ucs"><div class="ucs-l">EARNED</div><div class="ucs-v">$${earned.toFixed(2)}</div></div>
+        <div class="ucs"><div class="ucs-l">PLANS</div><div class="ucs-v">${invs.length}</div></div>
+      </div>
+      <div class="uc-actions">
+        <button class="uc-ban" onclick="toast('🚫 User ban feature coming with backend!')">🚫 BAN USER</button>
+        <button class="uc-msg" onclick="toast('💬 Message via Telegram for now!')">💬 MESSAGE</button>
+      </div>
+    </div>`;
+}
+
+// ── ANNOUNCEMENTS ──
+function sendAnnounce(){
+  const txt = document.getElementById('announceText').value.trim();
+  if(!txt){toast('❌ Write announcement first');return;}
+  announces.unshift({id:Date.now(),text:txt,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
+  localStorage.setItem('gpt30_announces', JSON.stringify(announces));
+  document.getElementById('announceText').value='';
+  renderAnnounces();
+  toast('📣 Announcement sent!');
+}
+
+function renderAnnounces(){
+  const el = document.getElementById('announceList');
+  if(!announces.length){
+    el.innerHTML='<div class="admin-empty"><div class="ae-icon">📭</div>No announcements yet</div>';return;
+  }
+  el.innerHTML = announces.map(a=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;
+      padding:14px;margin-bottom:8px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;
+        background:linear-gradient(90deg,var(--glow2),var(--glow))"></div>
+      <div style="font-size:0.82rem;color:var(--text);line-height:1.5;margin-bottom:8px">${a.text}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--muted)">${a.date} · ${a.time}</div>
+    </div>`).join('');
+}
+
+// ── TOAST ──
+function toast(msg){
+  const t=document.getElementById('toastEl');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ── AUTO REFRESH ──
+setInterval(()=>{
+  if(document.getElementById('adminApp').style.display !== 'none') loadData();
+}, 5000);
+</script>
+</body>
+</html>
