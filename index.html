@@ -1024,6 +1024,71 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 </div>
 
 
+<!-- LOGIN/REGISTER PAGE -->
+<div id="authPage" style="display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto">
+  <div style="max-width:430px;margin:0 auto;padding:40px 20px">
+    <!-- Logo -->
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;
+        background:linear-gradient(135deg,#fff,var(--glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent">GPT30</div>
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-top:4px">AI INVESTMENT PLATFORM</div>
+    </div>
+
+    <!-- Auth Tabs -->
+    <div style="display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;gap:4px;margin-bottom:24px">
+      <button id="loginTabBtn" onclick="authTab('login')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000">Login</button>
+      <button id="registerTabBtn" onclick="authTab('register')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:transparent;color:var(--muted)">Register</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div style="margin-bottom:14px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
+        <input id="loginEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
+        <input id="loginPass" type="password" placeholder="Enter your password..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <button onclick="doLogin()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">⚡ LOGIN</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none">
+      <div style="margin-bottom:12px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">FULL NAME</div>
+        <input id="regName" type="text" placeholder="Enter your name..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
+        <input id="regEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
+        <input id="regPass" type="password" placeholder="Min 6 characters..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PHONE (OPTIONAL)</div>
+        <input id="regPhone" type="tel" placeholder="Enter phone number..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">REFERRAL CODE (OPTIONAL)</div>
+        <input id="regRef" type="text" placeholder="Enter referral code..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+      </div>
+      <button onclick="doRegister()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">🚀 CREATE ACCOUNT</button>
+    </div>
+
+    <!-- Error msg -->
+    <div id="authError" style="display:none;background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);border-radius:12px;padding:12px;margin-top:14px;color:var(--red);font-size:0.82rem;text-align:center"></div>
+
+    <!-- Terms -->
+    <div style="text-align:center;margin-top:20px;font-size:0.7rem;color:var(--muted)">
+      By continuing you agree to our <span onclick="openLegal('terms')" style="color:var(--glow);cursor:pointer">Terms & Conditions</span>
+    </div>
+  </div>
+</div>
+
+
 <!-- BOTTOM NAV -->
 <div class="bnav">
   <button class="nb active" id="nb-plans" onclick="goPage('plans')"><div class="nb-icon">📈</div><div class="nb-lbl">Plans</div><div class="nb-dot"></div></button>
@@ -1091,6 +1156,40 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 <div class="toast" id="toastEl"></div>
 
 <script>
+
+// ══ AUTH VARIABLES ══
+let authToken = localStorage.getItem('g30_token') || null;
+let currentUser = JSON.parse(localStorage.getItem('g30_user') || 'null');
+const API_URL = 'https://gpt30-backend-production.up.railway.app/api';
+
+async function apiCall(endpoint, method='GET', body=null, useAuth=true){
+  const headers = {'Content-Type':'application/json'};
+  if(useAuth && authToken) headers['Authorization']='Bearer '+authToken;
+  const opts = {method, headers};
+  if(body) opts.body = JSON.stringify(body);
+  try{
+    const res = await fetch(API_URL+endpoint, opts);
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error||'Request failed');
+    return data;
+  }catch(err){ throw err; }
+}
+
+function saveAuth(token, user){
+  authToken=token; currentUser=user;
+  localStorage.setItem('g30_token',token);
+  localStorage.setItem('g30_user',JSON.stringify(user));
+}
+
+function clearAuth(){
+  authToken=null; currentUser=null;
+  localStorage.removeItem('g30_token');
+  localStorage.removeItem('g30_user');
+}
+
+function isLoggedIn(){ return authToken && currentUser; }
+
+
 // ══ DATA ══
 const PLANS=[
   {id:'p0',name:'STARTER',invest:10,daily:1.6,days:60,cls:'pc0',badge:'BASIC'},
@@ -1700,19 +1799,120 @@ function closeLegal(){
 
 
 // ══ INIT ══
-// VERSION CHECK - if version mismatch, clear old data
 const APP_VER = 'v3.0';
 const savedVer = localStorage.getItem('g30_ver');
 if(savedVer !== APP_VER){
-  // New version - clear ALL old data
+  clearAuth();
   localStorage.clear();
-  wallet=0; earned=0; investments=[]; deposits=[]; withdrawals=[]; referrals=[]; refEarned=0; profile={};
+  wallet=0;earned=0;investments=[];deposits=[];withdrawals=[];referrals=[];refEarned=0;profile={};
   localStorage.setItem('g30_ver', APP_VER);
-  profile.uid='GPT'+Math.floor(10000+Math.random()*90000);
   sv();
 }
 
+// Check login
+if(!isLoggedIn()){
+  showAuthPage();
+} else {
+  onLoginSuccess();
+}
+
 renderPlans();updateHero();startLive();
+
+
+
+// ══ AUTH FUNCTIONS ══
+function showAuthPage(){
+  document.getElementById('authPage').style.display='block';
+}
+function hideAuthPage(){
+  document.getElementById('authPage').style.display='none';
+}
+
+function authTab(t){
+  document.getElementById('loginForm').style.display = t==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = t==='register'?'block':'none';
+  const lb = document.getElementById('loginTabBtn');
+  const rb = document.getElementById('registerTabBtn');
+  if(t==='login'){
+    lb.style.background='linear-gradient(135deg,var(--glow2),var(--glow))';lb.style.color='#000';
+    rb.style.background='transparent';rb.style.color='var(--muted)';
+  } else {
+    rb.style.background='linear-gradient(135deg,var(--glow2),var(--glow))';rb.style.color='#000';
+    lb.style.background='transparent';lb.style.color='var(--muted)';
+  }
+  document.getElementById('authError').style.display='none';
+}
+
+function showAuthError(msg){
+  const el=document.getElementById('authError');
+  el.textContent=msg;el.style.display='block';
+}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value.trim();
+  if(!email||!pass){showAuthError('Please fill all fields');return;}
+  try {
+    const btn=document.querySelector('#loginForm button');
+    btn.textContent='Logging in...';btn.disabled=true;
+    const data = await apiCall('/login','POST',{email,password:pass},false);
+    saveAuth(data.token, data.user);
+    hideAuthPage();
+    onLoginSuccess();
+    toast('✅ Welcome back, '+data.user.name+'!');
+  } catch(err){
+    showAuthError('❌ '+err.message);
+    const btn=document.querySelector('#loginForm button');
+    btn.textContent='⚡ LOGIN';btn.disabled=false;
+  }
+}
+
+async function doRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPass').value.trim();
+  const phone=document.getElementById('regPhone').value.trim();
+  const ref=document.getElementById('regRef').value.trim();
+  if(!name||!email||!pass){showAuthError('Name, email and password required');return;}
+  if(pass.length<6){showAuthError('Password must be at least 6 characters');return;}
+  try {
+    const btn=document.querySelector('#registerForm button');
+    btn.textContent='Creating account...';btn.disabled=true;
+    const data = await apiCall('/register','POST',{name,email,password:pass,phone,referralCode:ref},false);
+    saveAuth(data.token, data.user);
+    hideAuthPage();
+    onLoginSuccess();
+    toast('🎉 Welcome to GPT30, '+data.user.name+'!');
+  } catch(err){
+    showAuthError('❌ '+err.message);
+    const btn=document.querySelector('#registerForm button');
+    btn.textContent='🚀 CREATE ACCOUNT';btn.disabled=false;
+  }
+}
+
+function onLoginSuccess(){
+  if(currentUser){
+    wallet = parseFloat(currentUser.wallet) || 0;
+    earned = parseFloat(currentUser.totalEarned) || 0;
+    profile.name = currentUser.name || '';
+    profile.email = currentUser.email || '';
+    profile.uid = currentUser.uid || '';
+    sv();
+  }
+  updateHero();
+  renderPlans();
+  startLive();
+}
+
+// Override doLogout to clear token
+function doLogout(){
+  if(confirm('Logout?')){
+    clearAuth();
+    localStorage.clear();
+    location.reload();
+  }
+}
+
 
 // ── SHARE FUNCTIONS ──
 function getShareMsg(){
