@@ -874,7 +874,7 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
       <div class="ref-link-card">
         <div class="rl-label">YOUR REFERRAL LINK</div>
         <div class="rl-box">
-          <div class="rl-txt" id="refLinkTxt">gpt30.app/ref/loading...</div>
+          <div class="rl-txt" id="refLinkTxt">socialacount73-coder.github.io/gpt30?ref=loading...</div>
           <button class="rl-copy" onclick="copyRef()" id="refCopyBtn">COPY</button>
         </div>
         <!-- SHARE BUTTONS -->
@@ -1500,7 +1500,7 @@ function renderHist(){
 
 // ══ REFERRAL ══
 function renderRef(){
-  document.getElementById('refLinkTxt').textContent='gpt30.app/ref/'+MY_CODE;
+  document.getElementById('refLinkTxt').textContent='socialacount73-coder.github.io/gpt30?ref='+MY_CODE;
   document.getElementById('refCodeDisp').textContent=MY_CODE;
 
   const l1 = referrals.filter(r=>r.level===1||!r.level);
@@ -1549,7 +1549,7 @@ function renderRef(){
   }
 }
 function copyRef(){
-  navigator.clipboard.writeText('https://gpt30.app/ref/'+MY_CODE).catch(()=>{});
+  navigator.clipboard.writeText('https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE).catch(()=>{});
   document.getElementById('refCopyBtn').textContent='✓ COPIED';
   toast('🔗 Referral link copied!');
   setTimeout(()=>{document.getElementById('refCopyBtn').textContent='COPY'},2000);
@@ -1916,7 +1916,7 @@ function doLogout(){
 
 // ── SHARE FUNCTIONS ──
 function getShareMsg(){
-  const link='https://gpt30.app/ref/'+MY_CODE;
+  const link='https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE;
   return '🚀 *GPT30 AI Investment Platform*\n\n💰 Earn *16% daily returns* on your investment!\n👥 Join me and start earning today!\n\n✅ Plans starting from just *$10 USDT*\n⚡ Daily payouts • 60-day plans\n🎁 Referral bonuses available\n\n🔗 Join here: '+link+'\n\nUse my code: *'+MY_CODE+'*';
 }
 function shareWA(){
@@ -1924,20 +1924,20 @@ function shareWA(){
   window.open('https://wa.me/?text='+msg,'_blank');
 }
 function shareFB(){
-  const link=encodeURIComponent('https://gpt30.app/ref/'+MY_CODE);
+  const link=encodeURIComponent('https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE);
   window.open('https://www.facebook.com/sharer/sharer.php?u='+link,'_blank');
 }
 function shareTG(){
-  const link='https://gpt30.app/ref/'+MY_CODE;
+  const link='https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE;
   const msg=encodeURIComponent(getShareMsg());
   window.open('https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+msg,'_blank');
 }
 function shareTwitter(){
-  const msg=encodeURIComponent('🚀 Join GPT30 AI Investment! Earn 16% daily. Use my ref: https://gpt30.app/ref/'+MY_CODE);
+  const msg=encodeURIComponent('🚀 Join GPT30 AI Investment! Earn 16% daily. Use my ref: https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE);
   window.open('https://twitter.com/intent/tweet?text='+msg,'_blank');
 }
 function shareNative(){
-  const link='https://gpt30.app/ref/'+MY_CODE;
+  const link='https://socialacount73-coder.github.io/gpt30?ref='+MY_CODE;
   if(navigator.share){
     navigator.share({title:'GPT30 AI Investment',text:getShareMsg(),url:link}).catch(()=>{});
   } else {
