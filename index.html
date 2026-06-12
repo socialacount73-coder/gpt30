@@ -22,7 +22,16 @@
 <!-- Icons -->
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+<style>
+/* Fallback fonts if Google Fonts fails */
+@font-face {
+  font-family: 'Syne';
+  src: local('Arial Black'), local('Helvetica Neue');
+  font-weight: 800;
+}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -31,7 +40,7 @@
   --red:#ff4d6d;--text:#cde4ff;--muted:#2e4a75;--white:#fff;
 }
 html,body{height:100%;overflow-x:hidden;background:var(--bg)}
-body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+body{color:var(--text);font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;min-height:100vh}
 
 /* BG */
 .bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -56,14 +65,14 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   border-bottom:1px solid rgba(0,229,255,0.06);
   position:sticky;top:0;z-index:40;
 }
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:-1px;
+.logo{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:-1px;
   background:linear-gradient(135deg,#fff 0%,var(--glow) 60%,var(--glow2) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.logo-sub{font-size:0.55rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace}
+.logo-sub{font-size:0.55rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
 .live-pill{display:flex;align-items:center;gap:5px;
   background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);
   border-radius:50px;padding:5px 11px;
-  font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--green)}
+  font-family:'Space Mono','Courier New',monospace;font-size:0.58rem;color:var(--green)}
 .ldot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
 
@@ -85,14 +94,14 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   background:linear-gradient(90deg,transparent,var(--glow),transparent)}
 .hero::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;
   background:radial-gradient(circle,rgba(0,229,255,0.07),transparent 70%);right:-30px;top:-30px}
-.hero-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px}
-.hero-bal{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:#fff;line-height:1;
+.hero-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono','Courier New',monospace;margin-bottom:6px}
+.hero-bal{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:2.4rem;color:#fff;line-height:1;
   text-shadow:0 0 30px rgba(0,229,255,0.2)}
 .hero-bal span{font-size:1rem;color:var(--muted);font-weight:600}
 .hero-row{display:flex;gap:10px;margin-top:14px}
 .hstat{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:10px 12px}
-.hstat-l{font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace}
-.hstat-v{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-top:3px}
+.hstat-l{font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
+.hstat-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:1rem;margin-top:3px}
 .hstat-v.g{color:var(--green)}.hstat-v.gold{color:var(--gold)}
 
 /* LIVE COUNTER */
@@ -105,21 +114,21 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .live-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--green),transparent)}
 .lb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.lb-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:3px;color:var(--green);opacity:0.8}
+.lb-label{font-family:'Space Mono','Courier New',monospace;font-size:0.58rem;letter-spacing:3px;color:var(--green);opacity:0.8}
 .lb-badge{display:flex;align-items:center;gap:5px;background:rgba(0,245,160,0.1);
   border:1px solid rgba(0,245,160,0.2);border-radius:50px;padding:3px 9px;
-  font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--green)}
-.lb-amount{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--green);
+  font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;color:var(--green)}
+.lb-amount{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:2rem;color:var(--green);
   text-shadow:0 0 24px rgba(0,245,160,0.4);transition:color 0.1s}
 .lb-amount.flash{color:#fff;text-shadow:0 0 40px rgba(0,245,160,0.9)}
 .lb-sub{display:flex;justify-content:space-between;margin-top:6px}
-.lb-rate{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)}
+.lb-rate{font-family:'Space Mono','Courier New',monospace;font-size:0.58rem;color:var(--muted)}
 .lb-rate strong{color:var(--green)}
 .lb-bar{height:3px;background:rgba(0,245,160,0.08);border-radius:2px;margin-top:8px;overflow:hidden}
 .lb-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--glow));border-radius:2px;transition:width 1s linear}
 
 /* SEC TITLE */
-.sec-ttl{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-bottom:12px}
+.sec-ttl{font-family:'Space Mono','Courier New',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-bottom:12px}
 
 /* PLAN CARDS */
 .plan-card{
@@ -136,22 +145,22 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .pc4::before{background:linear-gradient(90deg,#4a0070,#c060ff)}
 .pc5::before{background:linear-gradient(90deg,var(--glow2),var(--glow))}
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.pc-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:1px}
+.pc-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;letter-spacing:1px}
 .pc0 .pc-name{color:#aaa}.pc1 .pc-name{color:var(--green)}.pc2 .pc-name{color:#60aaff}
 .pc3 .pc-name{color:var(--gold)}.pc4 .pc-name{color:#c060ff}.pc5 .pc-name{color:var(--glow)}
-.pc-badge{font-family:'Space Mono',monospace;font-size:0.58rem;
+.pc-badge{font-family:'Space Mono','Courier New',monospace;font-size:0.58rem;
   background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
   border-radius:50px;padding:3px 9px;color:var(--muted)}
 .pc5 .pc-badge{background:rgba(0,229,255,0.08);border-color:rgba(0,229,255,0.2);color:var(--glow)}
-.pc-invest{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#fff;margin-bottom:12px}
+.pc-invest{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.8rem;color:#fff;margin-bottom:12px}
 .pc-invest em{font-size:0.85rem;color:var(--muted);font-style:normal;font-weight:400}
 .pc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
 .pcs{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:9px 8px;text-align:center}
-.pcs-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
-.pcs-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px;color:#fff}
+.pcs-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
+.pcs-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px;color:#fff}
 .pcs-v.g{color:var(--green)}.pcs-v.gold{color:var(--gold)}
 .invest-btn{width:100%;padding:13px;border-radius:11px;border:none;cursor:pointer;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:1px;
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:1px;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;transition:all 0.3s}
 .invest-btn:active{transform:scale(0.97)}
 
@@ -161,21 +170,21 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .inv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,var(--glow2),var(--glow))}
 .ic-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.ic-name{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--glow);letter-spacing:1px}
-.ic-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.ic-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.95rem;color:var(--glow);letter-spacing:1px}
+.ic-amt{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
 .prog-wrap{margin-bottom:14px}
 .prog-top{display:flex;justify-content:space-between;margin-bottom:5px}
-.prog-top span{font-size:0.58rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+.prog-top span{font-size:0.58rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
 .prog-track{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--glow2),var(--glow));border-radius:3px;transition:width 1s}
 .tc-row{display:flex;gap:10px;margin-bottom:12px;align-items:stretch}
 .timer-box{flex:1;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.1);
   border-radius:13px;padding:12px;text-align:center}
-.td{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--glow);
+.td{font-family:'Space Mono','Courier New',monospace;font-size:1.3rem;font-weight:700;color:var(--glow);
   letter-spacing:2px;text-shadow:0 0 16px rgba(0,229,255,0.35)}
-.tsub{font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-top:3px;font-family:'Space Mono',monospace}
+.tsub{font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-top:3px;font-family:'Space Mono','Courier New',monospace}
 .claim-btn{flex:1;border-radius:13px;border:none;cursor:pointer;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;line-height:1.4;transition:all 0.3s}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.78rem;line-height:1.4;transition:all 0.3s}
 .claim-btn.ready{background:linear-gradient(135deg,#009944,var(--green));color:#000;
   box-shadow:0 0 20px rgba(0,245,160,0.3);animation:cpulse 2s infinite}
 @keyframes cpulse{0%,100%{box-shadow:0 0 20px rgba(0,245,160,0.3)}50%{box-shadow:0 0 36px rgba(0,245,160,0.6)}}
@@ -183,52 +192,52 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .ic-bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
   padding-top:12px;border-top:1px solid rgba(255,255,255,0.05)}
 .ics{text-align:center}
-.ics-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
-.ics-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;margin-top:2px;color:var(--green)}
+.ics-l{font-size:0.52rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
+.ics-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.85rem;margin-top:2px;color:var(--green)}
 .empty-state{text-align:center;padding:50px 20px}
 .es-icon{font-size:3rem;opacity:0.35;margin-bottom:12px}
 .es-text{color:var(--muted);font-size:0.85rem}
 .es-btn{margin-top:16px;padding:11px 24px;border-radius:50px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem}
 
 /* WALLET PAGE */
 .wbal-card{background:linear-gradient(135deg,#091630,#060c1c);border:1px solid var(--border);
   border-radius:20px;padding:20px;margin-bottom:12px;position:relative;overflow:hidden}
 .wbal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--glow),transparent)}
-.wbal-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px}
-.wbal-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:#fff;
+.wbal-label{font-size:0.58rem;letter-spacing:4px;color:var(--muted);font-family:'Space Mono','Courier New',monospace;margin-bottom:6px}
+.wbal-amt{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:2.2rem;color:#fff;
   text-shadow:0 0 24px rgba(0,229,255,0.15)}
 .wbal-amt span{font-size:0.95rem;color:var(--muted);font-weight:400}
 .wbal-btns{display:flex;gap:10px;margin-top:16px}
 .wbal-btn{flex:1;padding:13px;border-radius:13px;border:none;cursor:pointer;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.5px;transition:all 0.3s}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.5px;transition:all 0.3s}
 .wbal-btn:active{transform:scale(0.97)}
 .dep-btn2{background:linear-gradient(135deg,#006030,var(--green));color:#000}
 .wit-btn2{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000}
 .w-tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:4px;gap:4px;margin-bottom:14px}
 .w-tab{flex:1;padding:10px;text-align:center;border-radius:9px;cursor:pointer;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;color:var(--muted);border:none;background:transparent;transition:all 0.3s}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.8rem;color:var(--muted);border:none;background:transparent;transition:all 0.3s}
 .w-tab.active{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000}
 .wsec{display:none}.wsec.active{display:block}
 .w-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
 .w-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--glow2),var(--glow))}
-.wc-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:4px}
+.wc-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:4px}
 .wc-sub{font-size:0.78rem;color:var(--muted);margin-bottom:14px}
 .net-badge{display:inline-flex;align-items:center;gap:5px;
   background:rgba(255,100,0,0.08);border:1px solid rgba(255,100,0,0.2);
   border-radius:50px;padding:5px 12px;
-  font-family:'Space Mono',monospace;font-size:0.6rem;color:#ff7043;margin-bottom:14px}
+  font-family:'Space Mono','Courier New',monospace;font-size:0.6rem;color:#ff7043;margin-bottom:14px}
 .qr-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
 .qr-box{background:#fff;padding:10px;border-radius:14px;width:130px;height:130px;
   display:flex;align-items:center;justify-content:center}
 .qr-grid{width:110px;height:110px;display:grid;grid-template-columns:repeat(29,1fr);gap:0}
-.qr-lbl{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--muted);margin-top:7px}
-.addr-lbl{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px}
+.qr-lbl{font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--muted);margin-top:7px}
+.addr-lbl{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px}
 .addr-box{display:flex;align-items:center;gap:8px;background:rgba(0,229,255,0.04);
   border:1px solid rgba(0,229,255,0.12);border-radius:11px;padding:11px 12px;margin-bottom:12px}
-.addr-txt{flex:1;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--glow);word-break:break-all;line-height:1.5}
+.addr-txt{flex:1;font-family:'Space Mono','Courier New',monospace;font-size:0.62rem;color:var(--glow);word-break:break-all;line-height:1.5}
 .addr-copy{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.18);
   border-radius:8px;padding:7px 9px;cursor:pointer;font-size:0.9rem;flex-shrink:0}
 .dep-warn{display:flex;gap:9px;align-items:flex-start;
@@ -238,41 +247,41 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .dw-txt strong{color:var(--gold)}
 .dep-info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
 .di{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:10px;padding:9px 8px;text-align:center}
-.di-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
-.di-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;margin-top:2px}
+.di-l{font-family:'Space Mono','Courier New',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.di-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;margin-top:2px}
 .confirm-box{background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:11px;padding:13px}
 .confirm-row{display:flex;gap:8px;margin-bottom:6px}
 .sub-btn{padding:11px 14px;border-radius:10px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;white-space:nowrap}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.78rem;white-space:nowrap}
 .dep-note{font-size:0.68rem;color:var(--muted);line-height:1.4}
 .w-form{display:flex;flex-direction:column;gap:12px}
-.w-fld-l{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
+.w-fld-l{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
 .w-inp{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
-  border-radius:11px;padding:13px 13px;color:#fff;font-family:'DM Sans',sans-serif;
+  border-radius:11px;padding:13px 13px;color:#fff;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;
   font-size:16px;outline:none;transition:border 0.3s}
 .w-inp:focus{border-color:var(--glow)}
 .w-inp::placeholder{color:var(--muted)}
 .amt-row{display:flex;gap:8px}
 .max-btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);
   background:rgba(255,255,255,0.04);color:var(--gold);
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;cursor:pointer;white-space:nowrap}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.72rem;cursor:pointer;white-space:nowrap}
 .fee-row{display:flex;justify-content:space-between;background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.05);border-radius:11px;padding:12px 13px}
 .fee-item{text-align:center}
-.fee-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
-.fee-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;display:block;margin-top:2px}
+.fee-l{font-family:'Space Mono','Courier New',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.fee-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;color:#fff;display:block;margin-top:2px}
 .wit-btn{width:100%;padding:14px;border-radius:13px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:1px;
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:1px;
   box-shadow:0 5px 20px rgba(0,229,255,0.18)}
 .hist-item{background:var(--card);border:1px solid var(--border);border-radius:13px;
   padding:13px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.hi-type{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#fff}
+.hi-type{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.88rem;color:#fff}
 .hi-date{font-size:0.68rem;color:var(--muted);margin-top:2px}
-.hi-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;text-align:right}
+.hi-amt{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.95rem;text-align:right}
 .hi-amt.dep{color:var(--green)}.hi-amt.wit{color:var(--gold)}
-.hi-status{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:1px;
+.hi-status{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:1px;
   padding:3px 8px;border-radius:50px;display:inline-block;margin-top:3px}
 .hi-status.pending{background:rgba(255,150,0,0.1);color:#ffb74d;border:1px solid rgba(255,150,0,0.2)}
 .hi-status.done{background:rgba(0,245,160,0.1);color:var(--green);border:1px solid rgba(0,245,160,0.2)}
@@ -282,30 +291,30 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .ref-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
 .rsc{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:14px 10px;text-align:center}
 .rsc-icon{font-size:1.3rem;margin-bottom:5px}
-.rsc-v{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.rsc-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
 .rsc-v.g{color:var(--green)}.rsc-v.gold{color:var(--gold)}
-.rsc-l{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
+.rsc-l{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
 .how-card{background:var(--card);border:1px solid var(--border);border-radius:18px;
   padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
 .how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,#7a5000,var(--gold))}
-.how-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--gold);margin-bottom:12px}
+.how-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.9rem;color:var(--gold);margin-bottom:12px}
 .how-step{display:flex;align-items:flex-start;gap:11px;margin-bottom:10px}
 .how-step:last-child{margin-bottom:0}
 .hs-num{min-width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--glow2),var(--glow));
-  color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;
+  color:#000;font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.7rem;
   display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hs-txt{font-size:0.82rem;color:var(--text);line-height:1.4;padding-top:2px}
 .ref-link-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}
-.rl-label{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:8px}
+.rl-label{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:8px}
 .rl-box{display:flex;align-items:center;gap:8px;background:rgba(0,229,255,0.04);
   border:1px solid rgba(0,229,255,0.12);border-radius:11px;padding:11px 12px}
-.rl-txt{flex:1;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--glow);word-break:break-all}
+.rl-txt{flex:1;font-family:'Space Mono','Courier New',monospace;font-size:0.68rem;color:var(--glow);word-break:break-all}
 .rl-copy{padding:8px 13px;border-radius:9px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:0.68rem;white-space:nowrap}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.68rem;white-space:nowrap}
 .ref-code-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}
-.ref-code-disp{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;
+.ref-code-disp{font-family:'Space Mono','Courier New',monospace;font-size:1.6rem;font-weight:700;
   color:var(--gold);text-align:center;letter-spacing:5px;padding:8px 0;
   text-shadow:0 0 18px rgba(255,209,102,0.35)}
 
@@ -314,13 +323,13 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .ref-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,#7a5000,var(--gold))}
 .ri-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.ri-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;color:#fff}
+.ri-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.92rem;color:#fff}
 .ri-status{background:rgba(0,245,160,0.1);border:1px solid rgba(0,245,160,0.22);
-  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--green)}
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;color:var(--green)}
 .ri-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .ris{background:rgba(255,255,255,0.03);border-radius:9px;padding:8px;text-align:center}
-.ris-l{font-size:0.5rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
-.ris-v{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px}
+.ris-l{font-size:0.5rem;letter-spacing:2px;color:var(--muted);font-family:'Space Mono','Courier New',monospace}
+.ris-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.82rem;margin-top:2px}
 
 /* PROFILE PAGE */
 .prof-hero{background:linear-gradient(135deg,#091630,#060c1c);border:1px solid var(--border);
@@ -331,26 +340,26 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .avatar{width:72px;height:72px;border-radius:50%;
   background:linear-gradient(135deg,var(--glow2),var(--glow));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#000;
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.8rem;color:#000;
   position:relative;z-index:1}
 .av-ring{position:absolute;inset:-4px;border-radius:50%;
   border:2px solid var(--glow);opacity:0.5;animation:spin 4s linear infinite}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.prof-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:3px}
-.prof-uid{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);margin-bottom:3px}
+.prof-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:3px}
+.prof-uid{font-family:'Space Mono','Courier New',monospace;font-size:0.62rem;color:var(--muted);margin-bottom:3px}
 .prof-joined{font-size:0.72rem;color:var(--muted)}
 .prof-sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .psg{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center}
 .psg-icon{font-size:1.3rem;margin-bottom:5px}
-.psg-v{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green)}
-.psg-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
+.psg-v{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green)}
+.psg-l{font-family:'Space Mono','Courier New',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted);margin-top:2px}
 .prof-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:11px}
-.prof-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:13px}
+.prof-card-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:13px}
 .prof-fld{margin-bottom:11px}
-.prof-fld-l{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
+.prof-fld-l{font-family:'Space Mono','Courier New',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);margin-bottom:6px}
 .prof-save{width:100%;padding:13px;border-radius:12px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:1px;margin-top:4px}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:1px;margin-top:4px}
 .menu-item{display:flex;justify-content:space-between;align-items:center;
   padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:opacity 0.2s}
 .menu-item:last-child{border-bottom:none;padding-bottom:0}
@@ -366,10 +375,10 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .mi-tog.on .mit-thumb{left:23px}
 .prof-logout{width:100%;padding:13px;border-radius:12px;margin-top:4px;
   border:1px solid rgba(255,77,109,0.25);background:rgba(255,77,109,0.07);
-  color:var(--red);font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;letter-spacing:1px}
+  color:var(--red);font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;letter-spacing:1px}
 .prof-reset{width:100%;padding:11px;border-radius:12px;margin-top:8px;
   border:1px solid rgba(255,77,109,0.12);background:transparent;
-  color:rgba(255,77,109,0.5);font-family:'Syne',sans-serif;font-weight:600;font-size:0.78rem;cursor:pointer;letter-spacing:1px}
+  color:rgba(255,77,109,0.5);font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:600;font-size:0.78rem;cursor:pointer;letter-spacing:1px}
 
 /* BOTTOM NAV */
 .bnav{
@@ -382,7 +391,7 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   display:flex;gap:2px;z-index:50;
 }
 .nb{flex:1;padding:7px 2px;border-radius:12px;border:none;cursor:pointer;
-  font-family:'DM Sans',sans-serif;font-weight:600;
+  font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;font-weight:600;
   color:var(--muted);background:transparent;
   transition:all 0.25s;display:flex;flex-direction:column;align-items:center;gap:3px}
 .nb-icon{font-size:1.25rem;line-height:1;transition:transform 0.25s}
@@ -403,28 +412,28 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .m-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:13px auto 20px}
 .m-top{display:flex;justify-content:space-between;align-items:center;
   margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.m-pname{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--glow)}
-.m-pamt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#fff}
+.m-pname{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.2rem;color:var(--glow)}
+.m-pamt{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.6rem;color:#fff}
 .m-pamt em{font-size:0.85rem;color:var(--muted);font-style:normal;font-weight:400}
 .m-rows{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px}
 .m-row{display:flex;justify-content:space-between;align-items:center;
   padding:13px 14px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .m-row:last-child{border-bottom:none}
 .mr-l{font-size:0.78rem;color:var(--muted)}
-.mr-v{font-family:'Space Mono',monospace;font-size:0.82rem;color:#fff;font-weight:700}
+.mr-v{font-family:'Space Mono','Courier New',monospace;font-size:0.82rem;color:#fff;font-weight:700}
 .mr-v.g{color:var(--green)}.mr-v.gold{color:var(--gold)}
 .m-confirm{width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;margin-bottom:9px;
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;margin-bottom:9px;
   box-shadow:0 6px 24px rgba(0,229,255,0.2)}
 .m-cancel{width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);
-  background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.9rem;cursor:pointer}
+  background:transparent;color:var(--muted);font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;font-size:0.9rem;cursor:pointer}
 
 /* TOAST */
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);
   opacity:0;background:var(--card);border:1px solid rgba(0,245,160,0.3);
   color:var(--green);padding:11px 22px;border-radius:50px;
-  font-family:'Space Mono',monospace;font-size:0.66rem;letter-spacing:1px;
+  font-family:'Space Mono','Courier New',monospace;font-size:0.66rem;letter-spacing:1px;
   z-index:200;transition:all 0.35s;white-space:nowrap;
   box-shadow:0 0 24px rgba(0,245,160,0.15)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -437,9 +446,9 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .pending-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,#7a5000,var(--gold))}
 .pc-pending-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.pc-pending-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--gold)}
+.pc-pending-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;color:var(--gold)}
 .pc-pending-date{font-size:0.68rem;color:var(--muted);margin-top:3px}
-.pc-pending-amt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
+.pc-pending-amt{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}
 .pc-pending-status{display:flex;align-items:center;gap:8px;
   background:rgba(255,160,0,0.08);border:1px solid rgba(255,160,0,0.15);
   border-radius:10px;padding:10px 12px;margin-bottom:10px;
@@ -463,13 +472,13 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   padding:16px 18px;border-bottom:1px solid var(--border);
   background:rgba(2,4,14,0.95);position:sticky;top:0;
 }
-.lm-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--glow)}
+.lm-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;color:var(--glow)}
 .lm-close{background:rgba(255,255,255,0.06);border:1px solid var(--border);
   border-radius:50%;width:32px;height:32px;color:var(--muted);
   font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .lm-body{flex:1;overflow-y:auto;padding:20px 18px 40px;-webkit-overflow-scrolling:touch}
 .lm-section{margin-bottom:22px}
-.lm-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;
+.lm-section-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.9rem;
   color:var(--gold);margin-bottom:8px;padding-bottom:6px;
   border-bottom:1px solid rgba(255,209,102,0.15)}
 .lm-text{font-size:0.82rem;color:var(--text);line-height:1.75;opacity:0.85}
@@ -489,12 +498,12 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .splash-bg{position:absolute;inset:0;
   background:radial-gradient(ellipse at 50% 40%,rgba(0,85,255,0.15),transparent 70%)}
 .splash-content{position:relative;z-index:1;text-align:center;padding:40px 30px;width:100%}
-.splash-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;letter-spacing:-2px;
+.splash-logo{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:3.5rem;letter-spacing:-2px;
   background:linear-gradient(135deg,#fff 0%,var(--glow) 50%,var(--glow2) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   margin-bottom:8px;animation:splashPulse 2s ease-in-out infinite}
 @keyframes splashPulse{0%,100%{opacity:1}50%{opacity:0.7}}
-.splash-sub{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:6px;
+.splash-sub{font-family:'Space Mono','Courier New',monospace;font-size:0.65rem;letter-spacing:6px;
   color:var(--muted);margin-bottom:60px}
 .splash-orb{width:120px;height:120px;border-radius:50%;margin:0 auto 50px;
   background:radial-gradient(circle,rgba(0,229,255,0.15),transparent 70%);
@@ -510,8 +519,8 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   overflow:hidden;margin-bottom:10px;width:200px;margin:0 auto 10px}
 .sl-fill{height:100%;background:linear-gradient(90deg,var(--glow2),var(--glow));
   border-radius:2px;width:0%;transition:width 0.3s}
-.sl-text{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--muted)}
-.splash-version{font-family:'Space Mono',monospace;font-size:0.55rem;color:rgba(46,74,117,0.6);
+.sl-text{font-family:'Space Mono','Courier New',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--muted)}
+.splash-version{font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;color:rgba(46,74,117,0.6);
   position:absolute;bottom:30px;left:50%;transform:translateX(-50%);white-space:nowrap}
 
 /* ── ANNOUNCEMENT BAR ── */
@@ -524,7 +533,7 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .ab-track{flex:1;overflow:hidden;white-space:nowrap}
 .ab-content{
   display:inline-block;
-  font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--glow);
+  font-family:'Space Mono','Courier New',monospace;font-size:0.6rem;color:var(--glow);
   padding:0 20px;line-height:32px;
   animation:marquee 30s linear infinite;
   white-space:nowrap;
@@ -541,7 +550,7 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 }
 .lb-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.lbh-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;
+.lbh-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.4rem;
   color:var(--gold);margin-bottom:4px}
 .lbh-sub{font-size:0.72rem;color:var(--muted)}
 
@@ -550,16 +559,16 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   border:1px solid rgba(0,229,255,0.2);border-radius:16px;
   padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px;
 }
-.mrc-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--glow)}
-.mrc-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
+.mrc-rank{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.8rem;color:var(--glow)}
+.mrc-label{font-family:'Space Mono','Courier New',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--muted)}
 .mrc-mid{flex:1}
-.mrc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff}
+.mrc-name{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.95rem;color:#fff}
 .mrc-joined{font-size:0.7rem;color:var(--muted);margin-top:2px}
-.mrc-earned{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green);text-align:right}
+.mrc-earned{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;color:var(--green);text-align:right}
 
 .lb-tabs{display:flex;gap:8px;margin-bottom:14px}
 .lb-tab{flex:1;padding:11px;border-radius:12px;border:1px solid var(--border);
-  background:transparent;color:var(--muted);font-family:'Syne',sans-serif;
+  background:transparent;color:var(--muted);font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;
   font-weight:700;font-size:0.78rem;cursor:pointer;transition:all 0.3s}
 .lb-tab.active{background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;border-color:transparent}
 
@@ -567,22 +576,22 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   background:var(--card);border:1px solid var(--border);border-radius:14px;
   padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;
 }
-.lb-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;
+.lb-rank{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.1rem;
   min-width:32px;text-align:center}
 .lb-rank.r1{color:var(--gold)}.lb-rank.r2{color:#c0c0c0}.lb-rank.r3{color:#cd7f32}
 .lb-rank.rn{color:var(--muted)}
 .lb-av{width:38px;height:38px;border-radius:50%;
   background:linear-gradient(135deg,var(--glow2),var(--glow));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#000;flex-shrink:0}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;color:#000;flex-shrink:0}
 .lb-info{flex:1}
-.lb-uname{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:#fff}
+.lb-uname{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.9rem;color:#fff}
 .lb-detail{font-size:0.65rem;color:var(--muted);margin-top:2px}
-.lb-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--green);text-align:right}
+.lb-val{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1rem;color:var(--green);text-align:right}
 
 /* Telegram badge */
 .tg-badge{background:linear-gradient(135deg,#0088cc,#00aaff);color:#fff;
-  font-family:'Space Mono',monospace;font-size:0.55rem;padding:4px 10px;
+  font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;padding:4px 10px;
   border-radius:50px;letter-spacing:1px;white-space:nowrap}
 
 
@@ -592,8 +601,8 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 .comm-card.level1{background:linear-gradient(135deg,rgba(255,160,0,0.08),rgba(255,209,102,0.05));border:1px solid rgba(255,209,102,0.25)}
 .comm-card.level2{background:linear-gradient(135deg,rgba(192,96,255,0.08),rgba(100,0,200,0.05));border:1px solid rgba(192,96,255,0.25)}
 .cc-icon{font-size:1.4rem;margin-bottom:6px}
-.cc-level{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:4px}
-.cc-pct{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1}
+.cc-level{font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--muted);margin-bottom:4px}
+.cc-pct{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:2rem;line-height:1}
 .comm-card.level1 .cc-pct{color:var(--gold)}
 .comm-card.level2 .cc-pct{color:#c060ff}
 .cc-desc{font-size:0.65rem;color:var(--muted);margin-top:5px;line-height:1.4}
@@ -601,22 +610,22 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 
 .comm-example{background:var(--card);border:1px solid var(--border);border-radius:16px;
   padding:16px;margin-bottom:12px}
-.ce-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:12px}
+.ce-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.88rem;color:var(--glow);margin-bottom:12px}
 .ce-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0}
 .ce-label{font-size:0.78rem;color:var(--muted)}
-.ce-val{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem}
+.ce-val{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.85rem}
 .ce-divider{height:1px;background:rgba(255,255,255,0.06);margin:6px 0}
 
 /* level badges on ref items */
 .ri-lvl1{background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.25);
-  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:var(--gold)}
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;color:var(--gold)}
 .ri-lvl2{background:rgba(192,96,255,0.1);border:1px solid rgba(192,96,255,0.25);
-  border-radius:50px;padding:3px 9px;font-family:'Space Mono',monospace;font-size:0.52rem;color:#c060ff}
+  border-radius:50px;padding:3px 9px;font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;color:#c060ff}
 
 
 /* ── SHARE BUTTONS ── */
 .share-title{
-  font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:3px;
+  font-family:'Space Mono','Courier New',monospace;font-size:0.52rem;letter-spacing:3px;
   color:var(--muted);margin:14px 0 10px;
 }
 .share-btns{display:flex;gap:8px;justify-content:space-between}
@@ -627,7 +636,7 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 }
 .share-btn:active{transform:scale(0.93)}
 .sb-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.sb-label{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.58rem;color:var(--muted);white-space:nowrap}
+.sb-label{font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:0.58rem;color:var(--muted);white-space:nowrap}
 
 .share-btn.whatsapp{border-color:rgba(37,211,102,0.25);background:rgba(37,211,102,0.06)}
 .share-btn.whatsapp .sb-icon{background:rgba(37,211,102,0.12);color:#25d366}
@@ -663,13 +672,13 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 @keyframes slideUpBar{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
 .ib-left{display:flex;align-items:center;gap:10px;flex:1}
 .ib-icon{font-size:1.6rem;flex-shrink:0}
-.ib-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff}
+.ib-title{font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.85rem;color:#fff}
 .ib-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
 .ib-btns{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .ib-dismiss{background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;padding:4px}
 .ib-install{padding:8px 14px;border-radius:10px;border:none;cursor:pointer;
   background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.5px}
+  font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.5px}
 
 </style>
 </head>
@@ -735,11 +744,11 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
         </div>
         <div style="display:flex;align-items:flex-end;gap:8px">
           <div class="lb-amount" id="liveAmt">0.000000</div>
-          <div style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:5px">USDT</div>
+          <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:5px">USDT</div>
         </div>
         <div class="lb-sub">
           <div class="lb-rate">Per sec: <strong id="liveRate">0.000000</strong> USDT</div>
-          <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)" id="liveDayEarn">$0.00 today</div>
+          <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.58rem;color:var(--muted)" id="liveDayEarn">$0.00 today</div>
         </div>
         <div class="lb-bar"><div class="lb-fill" id="lbFill"></div></div>
       </div>
@@ -1029,53 +1038,53 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   <div style="max-width:430px;margin:0 auto;padding:40px 20px">
     <!-- Logo -->
     <div style="text-align:center;margin-bottom:32px">
-      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;
+      <div style="font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:2.5rem;
         background:linear-gradient(135deg,#fff,var(--glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent">GPT30</div>
-      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-top:4px">AI INVESTMENT PLATFORM</div>
+      <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.6rem;letter-spacing:4px;color:var(--muted);margin-top:4px">AI INVESTMENT PLATFORM</div>
     </div>
 
     <!-- Auth Tabs -->
     <div style="display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;gap:4px;margin-bottom:24px">
-      <button id="loginTabBtn" onclick="authTab('login')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000">Login</button>
-      <button id="registerTabBtn" onclick="authTab('register')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:transparent;color:var(--muted)">Register</button>
+      <button id="loginTabBtn" onclick="authTab('login')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.85rem;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000">Login</button>
+      <button id="registerTabBtn" onclick="authTab('register')" style="flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;font-size:0.85rem;background:transparent;color:var(--muted)">Register</button>
     </div>
 
     <!-- LOGIN FORM -->
     <div id="loginForm">
       <div style="margin-bottom:14px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
-        <input id="loginEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
+        <input id="loginEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
       <div style="margin-bottom:20px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
-        <input id="loginPass" type="password" placeholder="Enter your password..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
+        <input id="loginPass" type="password" placeholder="Enter your password..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
-      <button onclick="doLogin()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">⚡ LOGIN</button>
+      <button onclick="doLogin()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">⚡ LOGIN</button>
     </div>
 
     <!-- REGISTER FORM -->
     <div id="registerForm" style="display:none">
       <div style="margin-bottom:12px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">FULL NAME</div>
-        <input id="regName" type="text" placeholder="Enter your name..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">FULL NAME</div>
+        <input id="regName" type="text" placeholder="Enter your name..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
-        <input id="regEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">EMAIL</div>
+        <input id="regEmail" type="email" placeholder="Enter your email..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
-        <input id="regPass" type="password" placeholder="Min 6 characters..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PASSWORD</div>
+        <input id="regPass" type="password" placeholder="Min 6 characters..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PHONE (OPTIONAL)</div>
-        <input id="regPhone" type="tel" placeholder="Enter phone number..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">PHONE (OPTIONAL)</div>
+        <input id="regPhone" type="tel" placeholder="Enter phone number..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
       <div style="margin-bottom:20px">
-        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">REFERRAL CODE (OPTIONAL)</div>
-        <input id="regRef" type="text" placeholder="Enter referral code..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans',sans-serif" />
+        <div style="font-family:'Space Mono','Courier New',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);margin-bottom:7px">REFERRAL CODE (OPTIONAL)</div>
+        <input id="regRef" type="text" placeholder="Enter referral code..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;font-size:16px;outline:none;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif" />
       </div>
-      <button onclick="doRegister()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">🚀 CREATE ACCOUNT</button>
+      <button onclick="doRegister()" style="width:100%;padding:15px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--glow2),var(--glow));color:#000;font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,229,255,0.2)">🚀 CREATE ACCOUNT</button>
     </div>
 
     <!-- Error msg -->
@@ -1116,10 +1125,10 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
     <div class="m-handle"></div>
     <div style="text-align:center;padding:10px 0 20px">
       <div style="font-size:3rem;margin-bottom:12px">⏳</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:6px" id="pmPlan">— PLAN</div>
-      <div style="font-family:'Space Mono',monospace;font-size:1rem;color:var(--gold);margin-bottom:16px" id="pmAmt">—</div>
+      <div style="font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:6px" id="pmPlan">— PLAN</div>
+      <div style="font-family:'Space Mono','Courier New',monospace;font-size:1rem;color:var(--gold);margin-bottom:16px" id="pmAmt">—</div>
       <div style="background:rgba(255,160,0,0.07);border:1px solid rgba(255,160,0,0.2);border-radius:14px;padding:16px;margin-bottom:16px;text-align:left">
-        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--gold);margin-bottom:10px;font-size:0.9rem">📋 Next Steps:</div>
+        <div style="font-family:'Syne','Arial Black','Helvetica Neue',sans-serif;font-weight:700;color:var(--gold);margin-bottom:10px;font-size:0.9rem">📋 Next Steps:</div>
         <div style="font-size:0.82rem;color:var(--text);line-height:1.8">
           1️⃣ Go to <strong style="color:var(--glow)">Wallet → Deposit</strong><br>
           2️⃣ Send exact USDT amount to TRC20 address<br>
@@ -1139,8 +1148,8 @@ body{color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
   <div class="modal">
     <div class="m-handle"></div>
     <div class="m-top">
-      <div><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:3px">PLAN</div><div class="m-pname" id="mName">—</div></div>
-      <div style="text-align:right"><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:3px">INVEST</div><div class="m-pamt" id="mAmt">—</div></div>
+      <div><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono','Courier New',monospace;margin-bottom:3px">PLAN</div><div class="m-pname" id="mName">—</div></div>
+      <div style="text-align:right"><div style="font-size:0.55rem;letter-spacing:3px;color:var(--muted);font-family:'Space Mono','Courier New',monospace;margin-bottom:3px">INVEST</div><div class="m-pamt" id="mAmt">—</div></div>
     </div>
     <div class="m-rows" id="mRows"></div>
     <button class="m-confirm" onclick="confirmInvest()">⚡ CONFIRM INVESTMENT</button>
