@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
-  <rect width="192" height="192" rx="38" fill="#02040e"/>
-  <rect x="1" y="1" width="190" height="190" rx="37" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.4"/>
-  <text x="96" y="115" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="58" fill="#00e5ff" text-anchor="middle">GPT</text>
-  <text x="96" y="158" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="44" fill="#ffffff" text-anchor="middle">30</text>
-</svg>
