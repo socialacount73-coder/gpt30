@@ -1,8 +1,9 @@
 {
+  "id": "gpt30-ai-investment",
   "name": "GPT30 AI Investment",
   "short_name": "GPT30",
   "description": "GPT30 AI Investment Platform - Earn 16% daily returns on USDT investments",
-  "start_url": "/gpt30/index.html",
+  "start_url": "/gpt30/",
   "scope": "/gpt30/",
   "display": "standalone",
   "background_color": "#02040e",
@@ -11,25 +12,27 @@
   "lang": "en",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192x192/02040e/00e5ff?text=G30",
+      "src": "icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "https://via.placeholder.com/512x512/02040e/00e5ff?text=G30",
+      "src": "icon-512.svg",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
-  "categories": ["finance", "business"],
-  "shortcuts": [
+  "screenshots": [
     {
-      "name": "Investment Plans",
-      "short_name": "Plans",
-      "url": "/gpt30/index.html",
-      "description": "View all investment plans"
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "GPT30 Investment App"
     }
-  ]
+  ],
+  "prefer_related_applications": false,
+  "categories": ["finance", "business"]
 }
