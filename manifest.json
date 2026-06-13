@@ -1,33 +1,26 @@
 {
   "name": "GPT30 AI Investment",
   "short_name": "GPT30",
-  "description": "GPT30 AI Investment Platform — Earn 16% daily returns on USDT",
-  "start_url": "/index.html",
+  "description": "GPT30 AI Investment Platform - Earn 16% daily returns on USDT investments",
+  "start_url": "/gpt30/index.html",
+  "scope": "/gpt30/",
   "display": "standalone",
   "background_color": "#02040e",
   "theme_color": "#00e5ff",
   "orientation": "portrait",
-  "scope": "/",
   "lang": "en",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "https://via.placeholder.com/192x192/02040e/00e5ff?text=G30",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "https://via.placeholder.com/512x512/02040e/00e5ff?text=G30",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
     }
   ],
   "categories": ["finance", "business"],
@@ -35,14 +28,8 @@
     {
       "name": "Investment Plans",
       "short_name": "Plans",
-      "url": "/index.html#plans",
+      "url": "/gpt30/index.html",
       "description": "View all investment plans"
-    },
-    {
-      "name": "My Wallet",
-      "short_name": "Wallet",
-      "url": "/index.html#wallet",
-      "description": "Check your wallet balance"
     }
   ]
 }
