@@ -1411,9 +1411,25 @@ function claimReward(id){
   if(!inv||Date.now()<inv.nextClaim)return;
   inv.earnedAmt+=inv.daily;inv.claimed++;inv.nextClaim=Date.now()+86400000;
   wallet+=inv.daily;earned+=inv.daily;
+
+  if(currentUser){
+    currentUser.wallet = wallet;
+    currentUser.totalEarned = earned;
+    localStorage.setItem('g30_user', JSON.stringify(currentUser));
+  }
+
   if(inv.claimed>=inv.days){investments=investments.filter(i=>i.id!==id);toast('🎉 Plan Complete!');}
   else toast('💰 +$'+inv.daily+' USDT Claimed!');
-  sv();updateHero();startLive();renderInv();
+
+  sv();
+
+  const checkW = parseFloat(localStorage.getItem('g30_w')||'0');
+  if(Math.abs(checkW - wallet) > 0.001){
+    localStorage.setItem('g30_w', wallet.toFixed(4));
+    localStorage.setItem('g30_i', JSON.stringify(investments));
+  }
+
+  updateHero();startLive();renderInv();
 }
 
 // ══ LIVE COUNTER ══
@@ -1893,11 +1909,19 @@ async function doRegister(){
 
 function onLoginSuccess(){
   if(currentUser){
-    wallet = parseFloat(currentUser.wallet) || 0;
-    earned = parseFloat(currentUser.totalEarned) || 0;
-    profile.name = currentUser.name || '';
-    profile.email = currentUser.email || '';
-    profile.uid = currentUser.uid || '';
+    // Only use currentUser's wallet/earned as INITIAL values if no local data exists yet
+    const hasLocalData = localStorage.getItem('g30_w') !== null;
+    if(!hasLocalData){
+      wallet = parseFloat(currentUser.wallet) || 0;
+      earned = parseFloat(currentUser.totalEarned) || 0;
+    } else {
+      // Keep locally saved wallet (includes claimed rewards), don't overwrite
+      wallet = parseFloat(localStorage.getItem('g30_w')) || 0;
+      earned = parseFloat(localStorage.getItem('g30_e')) || 0;
+    }
+    profile.name = currentUser.name || profile.name || '';
+    profile.email = currentUser.email || profile.email || '';
+    profile.uid = currentUser.uid || profile.uid || '';
     sv();
   }
   updateHero();
